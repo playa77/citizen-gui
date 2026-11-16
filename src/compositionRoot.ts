@@ -2,6 +2,8 @@ import { LocalPreferencesStore } from './stores/localPreferences';
 import { HttpClient } from './services/http';
 import { SseClient } from './services/sse';
 import { DisclaimerService } from './services/disclaimer';
+import { IngestionService } from './services/ingestion';
+import { AnalysisService } from './services/analysis';
 import { complianceStore } from './stores/complianceStore';
 
 export class CompositionRoot {
@@ -12,6 +14,11 @@ export class CompositionRoot {
     CompositionRoot.http,
     CompositionRoot.prefs
   );
+  public static readonly ingestion = new IngestionService(
+    CompositionRoot.http,
+    CompositionRoot.prefs
+  );
+  public static readonly analysis = new AnalysisService(CompositionRoot.sse);
 }
 
 // Automatically wire HTTP 403 disclaimer mismatch to complianceStore
