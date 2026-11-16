@@ -4,6 +4,7 @@ import { SseClient } from './services/sse';
 import { DisclaimerService } from './services/disclaimer';
 import { IngestionService } from './services/ingestion';
 import { AnalysisService } from './services/analysis';
+import { CasesService } from './services/cases';
 import { complianceStore } from './stores/complianceStore';
 
 export class CompositionRoot {
@@ -19,6 +20,7 @@ export class CompositionRoot {
     CompositionRoot.prefs
   );
   public static readonly analysis = new AnalysisService(CompositionRoot.sse);
+  public static readonly cases = new CasesService(CompositionRoot.http);
 }
 
 // Automatically wire HTTP 403 disclaimer mismatch to complianceStore

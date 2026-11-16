@@ -102,6 +102,33 @@ export class HttpClient {
     return this.handleResponse<T>(response);
   }
 
+  public async requestBlob(config: RequestConfig): Promise<Blob> {
+    const method = config.method ?? 'GET';
+    const finalUrl = this.buildUrl(config.url, config.params);
+    const headers: Record<string, string> = {
+      ...config.headers,
+    };
+
+    if (!this.isDisclaimerExempt(finalUrl)) {
+      const ackVersion = this.prefs.getDisclaimerAckVersion();
+      if (ackVersion) {
+        headers['X-Disclaimer-Ack'] = ackVersion;
+      }
+    }
+
+    const response = await fetch(finalUrl, {
+      method,
+      headers,
+      signal: config.signal,
+    });
+
+    if (!response.ok) {
+      throw new ApiError(response.status, `HTTP_${response.status}`, response.statusText);
+    }
+
+    return response.blob();
+  }
+
   public async upload<T>(url: string, file: File, additionalFields?: Record<string, string>): Promise<T> {
     const headers: Record<string, string> = {
       Accept: 'application/json',
