@@ -8,11 +8,12 @@ import {
   FolderArchive,
   MessageSquare,
   Sparkles,
+  Activity,
 } from 'lucide-react';
 import { CompositionRoot } from '@/compositionRoot';
 import type { UiTheme } from '@/types/domain';
 
-export type ActiveTab = 'analyze' | 'conversations' | 'intake' | 'archive' | 'detail';
+export type ActiveTab = 'analyze' | 'conversations' | 'intake' | 'archive' | 'detail' | 'diagnostics';
 
 export interface NavbarProps {
   activeTab?: ActiveTab;
@@ -138,6 +139,20 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <FolderArchive className="w-4 h-4" aria-hidden="true" />
                 <span>Fall-Archiv</span>
               </button>
+
+              <button
+                type="button"
+                onClick={() => onNavigate('diagnostics')}
+                aria-current={activeTab === 'diagnostics' ? 'page' : undefined}
+                className={`inline-flex items-center gap-2 px-3.5 py-2 min-h-[var(--ds-size-target-min)] rounded-[var(--ds-radius-control)] ds-text-label-md font-semibold transition-colors ds-focus-ring cursor-pointer ${
+                  activeTab === 'diagnostics'
+                    ? 'bg-[var(--ds-color-surface-sunken)] text-[var(--ds-color-text-primary)] border border-[var(--ds-color-border-focus)]'
+                    : 'text-[var(--ds-color-text-secondary)] hover:text-[var(--ds-color-text-primary)] hover:bg-[var(--ds-color-bg-neutral-subtle)]'
+                }`}
+              >
+                <Activity className="w-4 h-4" aria-hidden="true" />
+                <span>Prüfstand</span>
+              </button>
             </nav>
           )}
         </div>
@@ -194,6 +209,18 @@ export const Navbar: React.FC<NavbarProps> = ({
                 }`}
               >
                 <FolderArchive className="w-5 h-5" aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                onClick={() => onNavigate('diagnostics')}
+                aria-label="Prüfstand & Diagnose"
+                className={`p-2 min-h-[var(--ds-size-target-min)] min-w-[var(--ds-size-target-min)] rounded-[var(--ds-radius-control)] ${
+                  activeTab === 'diagnostics'
+                    ? 'bg-[var(--ds-color-surface-sunken)] text-[var(--ds-color-text-primary)]'
+                    : 'text-[var(--ds-color-text-secondary)]'
+                }`}
+              >
+                <Activity className="w-5 h-5" aria-hidden="true" />
               </button>
             </div>
           )}

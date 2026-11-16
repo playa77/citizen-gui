@@ -8,6 +8,7 @@ import { CasesService } from './services/cases';
 import { DocumentService } from './services/documents';
 import { ConversationService } from './services/conversations';
 import { IntakeService } from './services/intake';
+import { DiagnosticsService } from './services/diagnostics';
 import { complianceStore } from './stores/complianceStore';
 
 export class CompositionRoot {
@@ -31,6 +32,7 @@ export class CompositionRoot {
     CompositionRoot.prefs
   );
   public static readonly intake = new IntakeService(CompositionRoot.http);
+  public static readonly diagnostics = new DiagnosticsService(CompositionRoot.http);
 }
 
 // Automatically wire HTTP 403 disclaimer mismatch to complianceStore

@@ -237,6 +237,69 @@ export interface CorpusJobStatusResponse {
   chunks_upserted: number;
 }
 
+export interface GoldsetCaseSummary {
+  id: string;
+  title: string;
+  description: string;
+  legal_area: string;
+  expected_findings_count?: number;
+}
+
+export interface GoldsetManifest {
+  id: string;
+  version: string;
+  legal_area?: string;
+  title?: string;
+  description?: string;
+}
+
+export interface GoldsetResponse {
+  goldset: GoldsetManifest;
+  cases: GoldsetCaseSummary[];
+}
+
+export interface GoldsetCaseDetail extends GoldsetCaseSummary {
+  input_document_text?: string;
+  expected_findings?: string[];
+  citations?: string[];
+  calculation?: Record<string, unknown>;
+  traps?: string[];
+}
+
+export interface EvalReportSummary {
+  report_id: string;
+  goldset_version: string;
+  git_sha?: string;
+  run_timestamp: string;
+  case_count: number;
+  aggregate: {
+    issue_recall: number;
+    citation_precision: number;
+    calculation_exact_match?: number;
+    frist_exact_match?: number;
+    assessment_match?: number;
+    quote_verification_rate?: number;
+    zero_regression?: boolean;
+    [key: string]: unknown;
+  };
+}
+
+export interface EvalReportsResponse {
+  reports: EvalReportSummary[];
+}
+
+export interface EvalReportDetail extends EvalReportSummary {
+  cases?: Array<{
+    case_id: string;
+    issue_recall: number;
+    citation_precision: number;
+    calculation_exact_match?: boolean;
+    frist_exact_match?: boolean;
+    latency_ms?: number;
+    errors?: string[];
+  }>;
+}
+
 // ==========================================
 // 7. Conversations (Chat-First API)
 // ==========================================

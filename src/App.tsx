@@ -9,6 +9,7 @@ import { CaseArchiveView } from '@/views/CaseArchiveView';
 import { CaseDetailView } from '@/views/CaseDetailView';
 import { ConversationView } from '@/views/ConversationView';
 import { IntakeView } from '@/views/IntakeView';
+import { DiagnosticsView } from '@/views/DiagnosticsView';
 
 export const App: React.FC = () => {
   const [isBootstrapping, setIsBootstrapping] = useState(true);
@@ -100,6 +101,10 @@ export const App: React.FC = () => {
 
             {activeTab === 'archive' && (
               <CaseArchiveView onSelectCase={handleOpenCaseDetail} />
+            )}
+
+            {activeTab === 'diagnostics' && (
+              <DiagnosticsView />
             )}
 
             {activeTab === 'detail' && selectedCaseId && (
