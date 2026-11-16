@@ -1,0 +1,282 @@
+{
+  "name": "Place list",
+  "summary": "Three to five places with a photo each: the name, rating, area, price band, distance, a line on why it fits, and whether it is open. One row per place in a narrow space, a row of cards that scrolls sideways in a wide one.",
+  "use": "when someone asks for somewhere to go (\"a quiet café to work from near me\") and will pick one",
+  "type": "content",
+  "style": "friendly",
+  "industries": [
+    "food",
+    "travel",
+    "events",
+    "any"
+  ],
+  "tags": [
+    "places",
+    "recommendations",
+    "photo",
+    "rating",
+    "carousel",
+    "list"
+  ],
+  "states": [
+    "open now",
+    "closing soon",
+    "fully booked",
+    "no rating",
+    "hover",
+    "focus",
+    "rows when narrow",
+    "scrolling row when wide"
+  ],
+  "source": null,
+  "a11y": "A list of places; each card is one button named \"View, <place>\". The rating is read as \"Rated 4.7 out of 5\", and open or closed is words as well as colour.",
+  "width": "wide",
+  "photos": [
+    {
+      "img": "photo-1616141037618-d671075fd1a1",
+      "author": "Angela Lo",
+      "page": "kMyevb36Ak8"
+    },
+    {
+      "img": "photo-1583354608715-177553a4035e",
+      "author": "Klara Kulikova",
+      "page": "yjQDnOhGE34"
+    },
+    {
+      "img": "photo-1559339352-11d035aa65de",
+      "author": "Albert",
+      "page": "YYZU0Lo1uXE"
+    }
+  ],
+  "spec": {
+    "use_when": [
+      "a recommendation of three to five places, each with a photo"
+    ],
+    "avoid_when": [
+      "one place in depth: use place-card",
+      "only an address and directions: use location-card",
+      "more than five places: answer in text or use result-list"
+    ],
+    "parts": [
+      {
+        "name": "title",
+        "selector": ".odl-place-list h3",
+        "what": "what was asked for",
+        "slot": "text"
+      },
+      {
+        "name": "note",
+        "selector": ".odl-note",
+        "what": "how many places, and how near",
+        "slot": "text"
+      },
+      {
+        "name": "places",
+        "selector": ".odl-list",
+        "what": "the places",
+        "slot": "list"
+      },
+      {
+        "name": "photo",
+        "selector": ".odl-ph .odl-img",
+        "what": "a photo of the place",
+        "slot": "media"
+      },
+      {
+        "name": "name",
+        "selector": ".odl-name",
+        "what": "the place's name",
+        "slot": "text"
+      },
+      {
+        "name": "rating",
+        "selector": ".odl-rate",
+        "what": "the average rating out of 5 and how many reviews",
+        "slot": "number"
+      },
+      {
+        "name": "meta",
+        "selector": ".odl-meta",
+        "what": "the area, the price band and how far it is",
+        "slot": "text"
+      },
+      {
+        "name": "why",
+        "selector": ".odl-why",
+        "what": "why it fits what the person asked for, in one line",
+        "slot": "text"
+      },
+      {
+        "name": "status",
+        "selector": ".odl-status",
+        "what": "open now, closing soon or fully booked, coloured by the data's meaning",
+        "slot": "text"
+      },
+      {
+        "name": "open",
+        "selector": ".odl-open",
+        "what": "the whole card opens the place",
+        "slot": "action"
+      }
+    ],
+    "data": {
+      "type": "object",
+      "required": [
+        "title",
+        "places"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "maxLength": 60,
+          "part": "title"
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 60,
+          "part": "note"
+        },
+        "places": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 5,
+          "part": "places",
+          "items": {
+            "type": "object",
+            "required": [
+              "photo",
+              "name",
+              "area"
+            ],
+            "properties": {
+              "photo": {
+                "type": "object",
+                "part": "photo",
+                "required": [
+                  "src",
+                  "alt"
+                ],
+                "properties": {
+                  "src": {
+                    "type": "string",
+                    "maxLength": 2048
+                  },
+                  "alt": {
+                    "type": "string",
+                    "maxLength": 200
+                  },
+                  "width": {
+                    "type": "integer"
+                  },
+                  "height": {
+                    "type": "integer"
+                  },
+                  "ratio": {
+                    "type": "string",
+                    "maxLength": 12
+                  },
+                  "credit": {
+                    "type": "string",
+                    "maxLength": 120
+                  }
+                }
+              },
+              "name": {
+                "type": "string",
+                "maxLength": 40,
+                "part": "name"
+              },
+              "rating": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 5,
+                "part": "rating"
+              },
+              "reviews": {
+                "type": "string",
+                "maxLength": 8,
+                "part": "rating"
+              },
+              "area": {
+                "type": "string",
+                "maxLength": 32,
+                "part": "meta"
+              },
+              "price_band": {
+                "type": "string",
+                "maxLength": 6,
+                "part": "meta"
+              },
+              "distance": {
+                "type": "string",
+                "maxLength": 20,
+                "part": "meta"
+              },
+              "why": {
+                "type": "string",
+                "maxLength": 80,
+                "part": "why"
+              },
+              "status": {
+                "type": "string",
+                "maxLength": 28,
+                "part": "status"
+              },
+              "tone": {
+                "type": "string",
+                "enum": [
+                  "neutral",
+                  "success",
+                  "warning",
+                  "danger"
+                ],
+                "part": "status"
+              }
+            }
+          }
+        }
+      }
+    },
+    "edge": {
+      "empty": {
+        "status": "handled",
+        "how": "no places: the list says there is nothing to show; better still, answer in text with what to change",
+        "evidence": "data-od-list=\"places\""
+      },
+      "loading": {
+        "status": "handled",
+        "how": "each photo box keeps its shape on the sunken surface and pulses quietly until the photo arrives",
+        "evidence": "aspect-ratio: 16 / 10"
+      },
+      "error": {
+        "status": "handled",
+        "how": "a photo that fails keeps its box, with an icon and the photo's description",
+        "evidence": "class=\"odl-img\""
+      },
+      "disabled": {
+        "status": "shown",
+        "how": "a place that can't be visited now says so in its status (fully booked, closed), in the danger or neutral colour",
+        "evidence": "[data-tone=\"danger\"]"
+      },
+      "overflow": {
+        "status": "handled",
+        "how": "in a narrow container each place is a row; in a wide one the cards scroll sideways and snap",
+        "evidence": "@container (min-width: 34rem)"
+      },
+      "long_text": {
+        "status": "handled",
+        "how": "names and lines wrap, long words break",
+        "evidence": "overflow-wrap: anywhere"
+      },
+      "missing_image": {
+        "status": "handled",
+        "evidence": "data-od-media",
+        "how": "the Smart UI renderer swaps a photo that fails to load for a calm tile of the same shape with an icon and its alt text"
+      }
+    },
+    "keyboard": [
+      "Tab moves from place to place, scrolling the row to show it",
+      "Enter or Space opens the focused place"
+    ]
+  }
+}

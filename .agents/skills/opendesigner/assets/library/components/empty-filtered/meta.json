@@ -1,0 +1,157 @@
+{
+  "name": "Filtered to nothing",
+  "summary": "What a list shows when its filters hide every item: which filters are on, how many items they hide, and one button to clear them.",
+  "use": "when filters, not a lack of data, leave a list or table empty",
+  "type": "states",
+  "style": "quiet",
+  "industries": [
+    "any"
+  ],
+  "tags": [
+    "filters",
+    "no matches",
+    "clear filters",
+    "empty state",
+    "table"
+  ],
+  "states": [
+    "filtered empty",
+    "filter removed",
+    "filters cleared",
+    "hover",
+    "focus"
+  ],
+  "source": null,
+  "a11y": "Each filter chip has a remove button named after the filter; focus moves to the next chip when one is removed, and a polite status says what changed.",
+  "width": "medium",
+  "live_region": "polite",
+  "tokens_planned": {
+    "--ds-state-empty-gap": "--ds-space-stack-md",
+    "--ds-state-empty-measure": "--ds-layout-measure-lead",
+    "--ds-state-empty-media": "--ds-size-icon-lg"
+  },
+  "spec": {
+    "use_when": [
+      "a list, table or board has items, but the current filters match none"
+    ],
+    "avoid_when": [
+      "the search text matched nothing: use empty-no-results",
+      "there are no items at all: use empty-first-use"
+    ],
+    "parts": [
+      {
+        "name": "title",
+        "selector": ".odl-empty-filtered [data-od-slot=\"title\"]",
+        "what": "the heading: what happened, in plain words, as in “No invoices match these filters”",
+        "slot": "text"
+      },
+      {
+        "name": "message",
+        "selector": ".odl-empty-filtered [data-od-slot=\"message\"]",
+        "what": "one or two sentences: what it means and what to do next, as in “Your filters hide all 46 invoices. Remove one, o”",
+        "slot": "text"
+      },
+      {
+        "name": "filters",
+        "selector": ".odl-empty-filtered [data-od-list=\"filters\"]",
+        "what": "the filters, one item each",
+        "slot": "list"
+      },
+      {
+        "name": "filters.label",
+        "selector": ".odl-empty-filtered [data-od-list=\"filters\"] [data-od-slot=\"label\"]",
+        "what": "the visible label, as in “Status: Overdue”",
+        "slot": "text"
+      },
+      {
+        "name": "filters.remove",
+        "selector": ".odl-empty-filtered [data-od-list=\"filters\"] [data-od-action=\"remove\"]",
+        "what": "the remove action",
+        "slot": "action"
+      },
+      {
+        "name": "clear",
+        "selector": ".odl-empty-filtered [data-od-action=\"clear\"]",
+        "what": "the Clear all filters action",
+        "slot": "action"
+      }
+    ],
+    "data": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "maxLength": 48,
+          "part": "title"
+        },
+        "message": {
+          "type": "string",
+          "maxLength": 96,
+          "part": "message"
+        },
+        "filters": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": {
+                "type": "string",
+                "maxLength": 24,
+                "part": "filters.label"
+              }
+            },
+            "required": [
+              "label"
+            ]
+          },
+          "part": "filters"
+        }
+      },
+      "required": [
+        "title",
+        "message",
+        "filters"
+      ]
+    },
+    "edge": {
+      "empty": {
+        "status": "shown",
+        "how": "This part is the empty state itself.",
+        "evidence": "class=\"odl-art\""
+      },
+      "loading": {
+        "status": "handled",
+        "evidence": "data-od-slot",
+        "how": "the Smart UI renderer draws each marked slot as a quiet block of its size while the data arrives; the static file shows the filled part"
+      },
+      "error": {
+        "status": "not_built",
+        "how": "Not applicable: an error isn't an empty list. Use page-banners or page-error."
+      },
+      "disabled": {
+        "status": "not_built",
+        "how": "No control here is ever disabled; each one always does something."
+      },
+      "overflow": {
+        "status": "handled",
+        "how": "Filter chips wrap onto more lines and stay centred.",
+        "evidence": "flex-wrap: wrap"
+      },
+      "long_text": {
+        "status": "handled",
+        "how": "Titles balance and body text wraps at word boundaries inside a capped measure.",
+        "evidence": "text-wrap"
+      },
+      "missing_image": {
+        "status": "none",
+        "how": "the part has no photo"
+      }
+    },
+    "keyboard": [
+      "Tab reaches each filter's remove button, then Clear all filters",
+      "Removing a filter moves focus to the next filter, or to Clear all filters"
+    ]
+  }
+}

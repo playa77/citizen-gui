@@ -1,0 +1,254 @@
+{
+  "name": "Home listing",
+  "summary": "A home to rent or buy: up to three photos (one large, two beside it when there is room), the price with its currency, the address, bedrooms, bathrooms and floor area, its status (available, under offer, let agreed), and a button to book a viewing.",
+  "use": "when someone searching for a home asks about one listing",
+  "type": "commerce",
+  "style": "friendly",
+  "industries": [
+    "home",
+    "any"
+  ],
+  "tags": [
+    "property",
+    "listing",
+    "photo",
+    "price",
+    "card"
+  ],
+  "states": [
+    "available",
+    "under offer",
+    "let agreed",
+    "one photo when narrow",
+    "three photos when wide",
+    "hover",
+    "focus",
+    "disabled"
+  ],
+  "source": null,
+  "a11y": "An article named by the listing; the photos are a list, each with alt text, and the status is words as well as colour.",
+  "width": "medium",
+  "photos": [
+    {
+      "img": "photo-1570129477492-45c003edd2be",
+      "author": "todd kent",
+      "page": "178j8tJrNlc"
+    },
+    {
+      "img": "photo-1583847268964-b28dc8f51f92",
+      "author": "Minh Pham",
+      "page": "OtXADkUh3-I"
+    },
+    {
+      "img": "photo-1566665797739-1674de7a421a",
+      "author": "mark champs",
+      "page": "Id2IIl1jOB0"
+    }
+  ],
+  "spec": {
+    "use_when": [
+      "one home with its photos, price and key facts"
+    ],
+    "avoid_when": [
+      "a holiday rental by the night: use stay-card",
+      "several homes: use result-list"
+    ],
+    "parts": [
+      {
+        "name": "photos",
+        "selector": ".odl-pics",
+        "what": "up to three photos; the first is largest",
+        "slot": "list"
+      },
+      {
+        "name": "photo",
+        "selector": ".odl-pics .odl-img",
+        "what": "one photo of the home",
+        "slot": "media"
+      },
+      {
+        "name": "title",
+        "selector": ".odl-home-listing h3",
+        "what": "what the home is",
+        "slot": "text"
+      },
+      {
+        "name": "address",
+        "selector": ".odl-where",
+        "what": "the street and area",
+        "slot": "text"
+      },
+      {
+        "name": "price",
+        "selector": ".odl-price",
+        "what": "the price with its currency, and what it covers",
+        "slot": "number"
+      },
+      {
+        "name": "facts",
+        "selector": ".odl-facts",
+        "what": "bedrooms, bathrooms and floor area",
+        "slot": "text"
+      },
+      {
+        "name": "status",
+        "selector": ".odl-status",
+        "what": "available, under offer or let agreed, coloured by what it says",
+        "slot": "text"
+      },
+      {
+        "name": "viewing",
+        "selector": ".odl-btn",
+        "what": "the main action: book a viewing",
+        "slot": "action"
+      }
+    ],
+    "data": {
+      "type": "object",
+      "required": [
+        "photos",
+        "title",
+        "address",
+        "price"
+      ],
+      "properties": {
+        "photos": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "part": "photos",
+          "items": {
+            "type": "object",
+            "required": [
+              "photo"
+            ],
+            "properties": {
+              "photo": {
+                "type": "object",
+                "part": "photo",
+                "required": [
+                  "src",
+                  "alt"
+                ],
+                "properties": {
+                  "src": {
+                    "type": "string",
+                    "maxLength": 2048
+                  },
+                  "alt": {
+                    "type": "string",
+                    "maxLength": 200
+                  },
+                  "width": {
+                    "type": "integer"
+                  },
+                  "height": {
+                    "type": "integer"
+                  },
+                  "ratio": {
+                    "type": "string",
+                    "maxLength": 12
+                  },
+                  "credit": {
+                    "type": "string",
+                    "maxLength": 120
+                  }
+                }
+              }
+            }
+          }
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 60,
+          "part": "title"
+        },
+        "address": {
+          "type": "string",
+          "maxLength": 60,
+          "part": "address"
+        },
+        "price": {
+          "type": "string",
+          "maxLength": 16,
+          "part": "price"
+        },
+        "price_note": {
+          "type": "string",
+          "maxLength": 40,
+          "part": "price"
+        },
+        "beds": {
+          "type": "string",
+          "maxLength": 16,
+          "part": "facts"
+        },
+        "baths": {
+          "type": "string",
+          "maxLength": 16,
+          "part": "facts"
+        },
+        "area": {
+          "type": "string",
+          "maxLength": 12,
+          "part": "facts"
+        },
+        "status": {
+          "type": "string",
+          "maxLength": 32,
+          "part": "status"
+        },
+        "tone": {
+          "type": "string",
+          "enum": [
+            "neutral",
+            "success",
+            "warning",
+            "danger"
+          ],
+          "part": "status"
+        }
+      }
+    },
+    "edge": {
+      "empty": {
+        "status": "not_built",
+        "how": "without a home, answer in text"
+      },
+      "loading": {
+        "status": "handled",
+        "how": "each photo box keeps its shape on the sunken surface and pulses quietly until the photo arrives",
+        "evidence": "aspect-ratio: 4 / 3"
+      },
+      "error": {
+        "status": "handled",
+        "how": "a photo that fails keeps its box, with an icon and the photo's description",
+        "evidence": "class=\"odl-img\""
+      },
+      "disabled": {
+        "status": "shown",
+        "how": "when viewings are closed the app sends the button disabled; it turns quiet neutral, still readable",
+        "evidence": ".odl-btn:disabled"
+      },
+      "overflow": {
+        "status": "handled",
+        "how": "in a narrow container only the first photo shows and the price goes under the title",
+        "evidence": "@container (min-width: 36rem)"
+      },
+      "long_text": {
+        "status": "handled",
+        "how": "the title and address wrap, long words break",
+        "evidence": "overflow-wrap: anywhere"
+      },
+      "missing_image": {
+        "status": "handled",
+        "evidence": "data-od-media",
+        "how": "the Smart UI renderer swaps a photo that fails to load for a calm tile of the same shape with an icon and its alt text"
+      }
+    },
+    "keyboard": [
+      "Tab reaches Book a viewing",
+      "Enter or Space presses it"
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+ "photos": [
+  {
+   "photo": {
+    "src": "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1280&h=960&fit=crop&auto=format&q=70",
+    "alt": "Grey wooden house with a lawn",
+    "width": 1280,
+    "height": 960,
+    "credit": "Photo: todd kent on Unsplash"
+   }
+  },
+  {
+   "photo": {
+    "src": "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=640&h=480&fit=crop&auto=format&q=70",
+    "alt": "Holiday-rental living room with a large window",
+    "width": 640,
+    "height": 480,
+    "credit": "Photo: Minh Pham on Unsplash"
+   }
+  },
+  {
+   "photo": {
+    "src": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=640&h=480&fit=crop&auto=format&q=70",
+    "alt": "Bedroom with a blue headboard",
+    "width": 640,
+    "height": 480,
+    "credit": "Photo: mark champs on Unsplash"
+   }
+  }
+ ],
+ "title": "Four-bedroom house with a porch and a lawn",
+ "address": "Larch Road, Fernhollow",
+ "price": "£525,000",
+ "price_note": "freehold",
+ "beds": "4 bedrooms",
+ "baths": "2 bathrooms",
+ "area": "148 m²",
+ "status": "Under offer",
+ "tone": "warning",
+ "viewing": {
+  "label": "Book a viewing",
+  "event": {
+   "name": "book_viewing",
+   "context": {
+    "listing": "larch-road-14"
+   }
+  }
+ }
+}

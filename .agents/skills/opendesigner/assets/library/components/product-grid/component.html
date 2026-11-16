@@ -1,0 +1,134 @@
+<!-- Icons: Lucide (lucide.dev), ISC licence -->
+<style>
+.odl-product-grid { box-sizing: border-box; inline-size: 100%; max-inline-size: 64rem; margin-inline: auto; container-type: inline-size; color: var(--ds-color-text-primary); font: var(--ds-text-body-md); text-wrap: pretty; }
+.odl-product-grid *, .odl-product-grid *::before, .odl-product-grid *::after { box-sizing: border-box; }
+.odl-product-grid .odl-head { display: grid; gap: var(--ds-space-stack-xs); margin-block-end: var(--ds-space-stack-lg); }
+.odl-product-grid h3 { margin: 0; font: var(--ds-text-title-md); }
+.odl-product-grid .odl-note { margin: 0; color: var(--ds-color-text-secondary); font: var(--ds-text-label-md); }
+/* columns follow the space the part has, never the window: 1, 2, 3 or 4 across */
+.odl-product-grid .odl-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-stack-lg) var(--ds-space-inline-md); margin: 0; padding: 0; list-style: none; }
+@container (min-width: 16rem) { .odl-product-grid .odl-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@container (min-width: 36rem) { .odl-product-grid .odl-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@container (min-width: 48rem) { .odl-product-grid .odl-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.odl-product-grid .odl-grid:has(> .odl-item:nth-child(1 of .odl-item:not([hidden])):last-child) { grid-template-columns: minmax(0, 15rem); }
+@container (min-width: 16rem) { .odl-product-grid .odl-grid:has(> .odl-item:nth-child(2 of .odl-item:not([hidden])):last-child) { grid-template-columns: repeat(2, minmax(0, 15rem)); } }
+@container (min-width: 16rem) and (max-width: 25.99rem) { .odl-product-grid .odl-grid:has(> .odl-item:nth-child(3 of .odl-item:not([hidden])):last-child) { grid-template-columns: minmax(0, 1fr); } }
+@container (min-width: 26rem) { .odl-product-grid .odl-grid:has(> .odl-item:nth-child(3 of .odl-item:not([hidden])):last-child) { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@container (min-width: 36rem) and (max-width: 47.99rem) { .odl-product-grid .odl-grid:has(> .odl-item:nth-child(4 of .odl-item:not([hidden])):last-child) { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@container (min-width: 16rem) and (max-width: 25.99rem) { .odl-product-grid .odl-grid:has(> .odl-item:nth-child(5 of .odl-item:not([hidden])):last-child) { grid-template-columns: minmax(0, 1fr); } }
+@container (min-width: 26rem) { .odl-product-grid .odl-grid:has(> .odl-item:nth-child(5 of .odl-item:not([hidden])):last-child) { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@container (min-width: 36rem) { .odl-product-grid .odl-grid:has(> .odl-item:nth-child(6 of .odl-item:not([hidden])):last-child) { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@container (min-width: 16rem) and (max-width: 35.99rem) { .odl-product-grid .odl-grid:has(> .odl-item:nth-child(7 of .odl-item:not([hidden])):last-child) { grid-template-columns: minmax(0, 1fr); } }
+@container (min-width: 36rem) { .odl-product-grid .odl-grid:has(> .odl-item:nth-child(7 of .odl-item:not([hidden])):last-child) { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.odl-product-grid .odl-grid { grid-auto-rows: auto; }
+/* each card takes four rows of the grid (photo, name, price, sizes and colours) and shares them with its row through
+   subgrid, so prices line up across a row whether a name takes one line or two */
+.odl-product-grid .odl-item { position: relative; display: grid; grid-row: span 4; grid-template-rows: subgrid; row-gap: var(--ds-space-stack-xs); align-content: start; min-inline-size: 0; }
+.odl-product-grid .odl-ph { aspect-ratio: 4 / 5; border-radius: var(--ds-radius-container); }
+.odl-product-grid .odl-item > .odl-status { position: absolute; inset-block-start: var(--ds-space-inset-sm); inset-inline-start: var(--ds-space-inset-sm); z-index: 1; max-inline-size: calc(100% - 2 * var(--ds-space-inset-sm)); box-shadow: var(--ds-elevation-raised); }
+.odl-product-grid .odl-name { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin: var(--ds-space-stack-xs) 0 0; font: var(--ds-text-body-md); font-weight: var(--ds-font-weight-label); }
+.odl-product-grid .odl-price { display: flex; flex-wrap: wrap; align-items: baseline; align-self: end; gap: var(--ds-space-inline-xs) var(--ds-space-inline-sm); margin: 0; font-variant-numeric: tabular-nums; }
+.odl-product-grid .odl-price strong { font: var(--ds-text-body-md); font-weight: var(--ds-font-weight-heading); }
+.odl-product-grid .odl-price s { color: var(--ds-color-text-tertiary); font: var(--ds-text-body-sm); }
+/* sizes and colours share one line under the price, left-aligned, so a swatch never sits beside the next card's price */
+.odl-product-grid .odl-more { display: flex; flex-wrap: wrap; align-items: center; align-self: start; gap: var(--ds-space-stack-xs) var(--ds-space-inline-md); }
+.odl-product-grid .odl-sizes { display: flex; flex-wrap: wrap; gap: var(--ds-space-inline-xs) var(--ds-space-inline-sm); margin: 0; padding: 0; list-style: none; color: var(--ds-color-text-secondary); font: var(--ds-text-body-md); font-variant-numeric: tabular-nums; }
+.odl-product-grid .odl-sizes [data-sold_out="true"] { color: var(--ds-color-text-tertiary); text-decoration: line-through; }
+.odl-product-grid .odl-sizes [data-sold_out="false"] { color: var(--ds-color-text-secondary); }
+/* a product that can't be bought now: its photo dims a little, its status stays */
+.odl-product-grid .odl-item:has(> .odl-status[data-tone="danger"]) .odl-img { opacity: 0.6; }
+/* while loading, a placeholder card shows bars only: no swatch rings, struck prices or status dots */
+.odl-product-grid .odl-item[inert] .odl-swatches, .odl-product-grid .odl-item[inert] .odl-price s { display: none; }
+.odl-product-grid .odl-item[inert] .odl-status::before { content: none; }
+/* the whole card opens the product: one button stretched over it, named "View, <product>" */
+.odl-product-grid .odl-open { position: absolute; inset: 0; z-index: 2; inline-size: 100%; padding: 0; border: 0; border-radius: var(--ds-radius-container); background: transparent; cursor: pointer; }
+/* still loading: the stretched button stays invisible, never a grey sheet over the card */
+.odl-product-grid .odl-open[data-od-pending] { background: transparent; animation: none; }
+.odl-product-grid .odl-open .odl-sr { color: var(--ds-color-text-primary); }
+.odl-product-grid .odl-open:focus-visible { outline: var(--ds-focus-ring-width) solid var(--ds-color-border-focus); outline-offset: var(--ds-focus-ring-offset); }
+.odl-product-grid .odl-item:has(.odl-open:hover) .odl-name { text-decoration: underline; text-underline-offset: var(--ds-space-2); }
+.odl-product-grid .odl-ph .odl-img { transition: transform var(--ds-motion-duration-medium) var(--ds-motion-easing-standard); }
+.odl-product-grid .odl-item:has(.odl-open:hover) .odl-ph .odl-img { transform: scale(var(--ds-motion-scale-enter)); }
+.odl-product-grid .odl-ph { position: relative; inline-size: 100%; overflow: hidden; background: var(--ds-color-surface-sunken); }
+.odl-product-grid .odl-ph::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 var(--ds-border-width-default) var(--ds-color-border-subtle); pointer-events: none; }
+.odl-product-grid .odl-ph .odl-img { position: absolute; inset: 0; display: block; inline-size: 100%; block-size: 100%; aspect-ratio: auto; object-fit: cover; }
+.odl-product-grid .odl-status { display: inline-flex; align-items: center; gap: var(--ds-space-inline-sm); inline-size: fit-content; max-inline-size: 100%; min-block-size: var(--ds-size-control-sm);
+  padding: 0 var(--ds-space-inset-sm); border-radius: var(--ds-radius-full); background: var(--ds-color-surface-raised); color: var(--ds-color-text-secondary);
+  font: var(--ds-text-label-md); font-weight: var(--ds-font-weight-label); }
+.odl-product-grid .odl-status::before { content: ""; flex: none; inline-size: var(--ds-space-6); block-size: var(--ds-space-6); border-radius: var(--ds-radius-full); background: currentColor; }
+.odl-product-grid .odl-status[data-tone="neutral"] { color: var(--ds-color-text-secondary); }
+.odl-product-grid .odl-status[data-tone="success"] { color: var(--ds-color-text-success); }
+.odl-product-grid .odl-status[data-tone="warning"] { color: var(--ds-color-text-warning); }
+.odl-product-grid .odl-status[data-tone="danger"] { color: var(--ds-color-text-danger); }
+.odl-product-grid [data-od-item][hidden] { display: none; }
+.odl-product-grid .odl-sr { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.odl-product-grid .odl-swatches { display: flex; flex-wrap: wrap; gap: var(--ds-space-inline-xs); margin: 0; padding: 0; list-style: none; }
+.odl-product-grid .odl-swatches li { inline-size: var(--ds-space-12); block-size: var(--ds-space-12); border-radius: var(--ds-radius-full); background: var(--c, var(--ds-color-bg-neutral-subtle));
+  box-shadow: inset 0 0 0 var(--ds-border-width-default) var(--ds-color-border-strong); }
+.odl-product-grid .odl-swatches [data-swatch="chalk"] { --c: var(--ds-color-neutral-light-2); }
+.odl-product-grid .odl-swatches [data-swatch="stone"] { --c: var(--ds-color-neutral-light-6); }
+.odl-product-grid .odl-swatches [data-swatch="ash"] { --c: var(--ds-color-neutral-light-9); }
+.odl-product-grid .odl-swatches [data-swatch="charcoal"] { --c: var(--ds-color-neutral-light-11); }
+.odl-product-grid .odl-swatches [data-swatch="ink"] { --c: var(--ds-color-neutral-light-12); }
+.odl-product-grid .odl-swatches [data-swatch="sand"] { --c: var(--ds-color-warning-light-4); }
+.odl-product-grid .odl-swatches [data-swatch="camel"] { --c: var(--ds-color-warning-light-9); }
+.odl-product-grid .odl-swatches [data-swatch="cocoa"] { --c: var(--ds-color-warning-light-11); }
+.odl-product-grid .odl-swatches [data-swatch="rust"] { --c: var(--ds-color-danger-light-10); }
+.odl-product-grid .odl-swatches [data-swatch="cherry"] { --c: var(--ds-color-danger-light-9); }
+.odl-product-grid .odl-swatches [data-swatch="rose"] { --c: var(--ds-color-danger-light-5); }
+.odl-product-grid .odl-swatches [data-swatch="moss"] { --c: var(--ds-color-success-light-9); }
+.odl-product-grid .odl-swatches [data-swatch="forest"] { --c: var(--ds-color-success-light-11); }
+.odl-product-grid .odl-swatches [data-swatch="sky"] { --c: var(--ds-color-info-light-6); }
+.odl-product-grid .odl-swatches [data-swatch="midnight"] { --c: var(--ds-color-info-light-12); }
+@media (prefers-reduced-motion: reduce) { .odl-product-grid, .odl-product-grid *, .odl-product-grid *::before { transition: none !important; animation: none !important; } }
+</style>
+<section class="odl-product-grid" aria-label="Knitwear and bags under £150" data-od-label="title">
+  <header class="odl-head"><h3 data-od-slot="title">Knitwear and bags under £150</h3><p class="odl-note" data-od-slot="note" data-od-optional>4 of 26 results</p></header>
+  <ul class="odl-grid" data-od-list="items">
+    <li class="odl-item" data-od-item data-od-template hidden>
+      <div class="odl-ph"><img class="odl-img" data-od-media="photo" src="https://images.unsplash.com/photo-1646270968802-6bad28659329?w=800&amp;h=1000&amp;fit=crop&amp;auto=format&amp;q=70" alt="" width="400" height="500" loading="lazy" decoding="async"></div>
+      <h4 class="odl-name" data-od-slot="name"></h4>
+      <p class="odl-price"><strong data-od-slot="price"></strong><s data-od-optional><span class="odl-sr">was </span><span data-od-slot="old_price"></span></s></p>
+      <div class="odl-more" data-od-optional><ul class="odl-sizes" data-od-list="sizes" data-od-optional aria-label="Sizes"><li data-od-item data-od-var="sold_out" data-sold_out="false"><span data-od-slot="label"></span><span class="odl-sr" data-od-when="sold_out=true">, sold out</span></li></ul>
+        <ul class="odl-swatches" data-od-list="colours" data-od-optional aria-label="Colours"><li data-od-item data-od-var="swatch" data-swatch="chalk" role="img" data-od-label="name" aria-label=""></li></ul></div>
+      <span class="odl-status" data-od-slot="status" data-od-var="tone" data-tone="neutral" data-od-optional></span>
+      <button type="button" class="odl-open" data-od-action="open" aria-label="View, "><span class="odl-sr" data-od-slot="label">View</span></button>
+    </li>
+    <li class="odl-item" data-od-item>
+      <div class="odl-ph"><img class="odl-img" data-od-media="photo" src="https://images.unsplash.com/photo-1646270968802-6bad28659329?w=800&amp;h=1000&amp;fit=crop&amp;auto=format&amp;q=70" alt="Stack of folded sweaters" width="400" height="500" loading="lazy" decoding="async"></div>
+      <h4 class="odl-name" data-od-slot="name">Ribbed merino jumper</h4>
+      <p class="odl-price"><strong data-od-slot="price">£68</strong><s data-od-optional><span class="odl-sr">was </span><span data-od-slot="old_price">£85</span></s></p>
+      <div class="odl-more" data-od-optional><ul class="odl-sizes" data-od-list="sizes" data-od-optional aria-label="Sizes"><li data-od-item data-od-var="sold_out" data-sold_out="false"><span data-od-slot="label">S</span><span class="odl-sr" data-od-when="sold_out=true">, sold out</span></li><li data-od-item data-od-var="sold_out" data-sold_out="false"><span data-od-slot="label">M</span><span class="odl-sr" data-od-when="sold_out=true">, sold out</span></li><li data-od-item data-od-var="sold_out" data-sold_out="true"><span data-od-slot="label">L</span><span class="odl-sr" data-od-when="sold_out=true">, sold out</span></li></ul>
+        <ul class="odl-swatches" data-od-list="colours" data-od-optional aria-label="Colours"><li data-od-item data-od-var="swatch" data-swatch="stone" role="img" data-od-label="name" aria-label="Stone"></li><li data-od-item data-od-var="swatch" data-swatch="midnight" role="img" data-od-label="name" aria-label="Navy"></li><li data-od-item data-od-var="swatch" data-swatch="rust" role="img" data-od-label="name" aria-label="Rust"></li></ul></div>
+      <span class="odl-status" data-od-slot="status" data-od-var="tone" data-tone="warning" data-od-optional>Only 2 left in M</span>
+      <button type="button" class="odl-open" data-od-action="open" aria-label="View, Ribbed merino jumper"><span class="odl-sr" data-od-slot="label">View</span></button>
+    </li>
+    <li class="odl-item" data-od-item>
+      <div class="odl-ph"><img class="odl-img" data-od-media="photo" src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&amp;h=1000&amp;fit=crop&amp;auto=format&amp;q=70" alt="White long-sleeve shirt on a plain background" width="400" height="500" loading="lazy" decoding="async"></div>
+      <h4 class="odl-name" data-od-slot="name">Brushed cotton overshirt</h4>
+      <p class="odl-price"><strong data-od-slot="price">£54</strong></p>
+      <div class="odl-more" data-od-optional><ul class="odl-sizes" data-od-list="sizes" data-od-optional aria-label="Sizes"><li data-od-item data-od-var="sold_out" data-sold_out="false"><span data-od-slot="label">S</span><span class="odl-sr" data-od-when="sold_out=true">, sold out</span></li><li data-od-item data-od-var="sold_out" data-sold_out="false"><span data-od-slot="label">M</span><span class="odl-sr" data-od-when="sold_out=true">, sold out</span></li><li data-od-item data-od-var="sold_out" data-sold_out="false"><span data-od-slot="label">L</span><span class="odl-sr" data-od-when="sold_out=true">, sold out</span></li><li data-od-item data-od-var="sold_out" data-sold_out="false"><span data-od-slot="label">XL</span><span class="odl-sr" data-od-when="sold_out=true">, sold out</span></li></ul>
+        <ul class="odl-swatches" data-od-list="colours" data-od-optional aria-label="Colours"><li data-od-item data-od-var="swatch" data-swatch="chalk" role="img" data-od-label="name" aria-label="Chalk"></li><li data-od-item data-od-var="swatch" data-swatch="charcoal" role="img" data-od-label="name" aria-label="Charcoal"></li></ul></div>
+      <span class="odl-status" data-od-slot="status" data-od-var="tone" data-tone="success" data-od-optional>In stock</span>
+      <button type="button" class="odl-open" data-od-action="open" aria-label="View, Brushed cotton overshirt"><span class="odl-sr" data-od-slot="label">View</span></button>
+    </li>
+    <li class="odl-item" data-od-item>
+      <div class="odl-ph"><img class="odl-img" data-od-media="photo" src="https://images.unsplash.com/photo-1605733513597-a8f8341084e6?w=800&amp;h=1000&amp;fit=crop&amp;auto=format&amp;q=70" alt="Grey leather satchel on a white surface" width="400" height="500" loading="lazy" decoding="async"></div>
+      <h4 class="odl-name" data-od-slot="name">Weekday leather satchel</h4>
+      <p class="odl-price"><strong data-od-slot="price">£145</strong></p>
+      <div class="odl-more" data-od-optional><ul class="odl-sizes" data-od-list="sizes" data-od-optional aria-label="Sizes"><li data-od-item data-od-var="sold_out" data-sold_out="false"><span data-od-slot="label">One size</span><span class="odl-sr" data-od-when="sold_out=true">, sold out</span></li></ul>
+        <ul class="odl-swatches" data-od-list="colours" data-od-optional aria-label="Colours"><li data-od-item data-od-var="swatch" data-swatch="ash" role="img" data-od-label="name" aria-label="Grey"></li><li data-od-item data-od-var="swatch" data-swatch="cocoa" role="img" data-od-label="name" aria-label="Brown"></li></ul></div>
+      <span class="odl-status" data-od-slot="status" data-od-var="tone" data-tone="success" data-od-optional>In stock</span>
+      <button type="button" class="odl-open" data-od-action="open" aria-label="View, Weekday leather satchel"><span class="odl-sr" data-od-slot="label">View</span></button>
+    </li>
+    <li class="odl-item" data-od-item>
+      <div class="odl-ph"><img class="odl-img" data-od-media="photo" src="https://images.unsplash.com/photo-1640901555383-7335ec5a6476?w=800&amp;h=1000&amp;fit=crop&amp;auto=format&amp;q=70" alt="Yellow handbag on a white background" width="400" height="500" loading="lazy" decoding="async"></div>
+      <h4 class="odl-name" data-od-slot="name">Mustard top-handle bag</h4>
+      <p class="odl-price"><strong data-od-slot="price">£79</strong><s data-od-optional><span class="odl-sr">was </span><span data-od-slot="old_price">£99</span></s></p>
+      <div class="odl-more" data-od-optional><ul class="odl-sizes" data-od-list="sizes" data-od-optional aria-label="Sizes"><li data-od-item data-od-var="sold_out" data-sold_out="true"><span data-od-slot="label">One size</span><span class="odl-sr" data-od-when="sold_out=true">, sold out</span></li></ul>
+        <ul class="odl-swatches" data-od-list="colours" data-od-optional aria-label="Colours"><li data-od-item data-od-var="swatch" data-swatch="camel" role="img" data-od-label="name" aria-label="Camel"></li></ul></div>
+      <span class="odl-status" data-od-slot="status" data-od-var="tone" data-tone="danger" data-od-optional>Sold out</span>
+      <button type="button" class="odl-open" data-od-action="open" aria-label="View, Mustard top-handle bag"><span class="odl-sr" data-od-slot="label">View</span></button>
+    </li>
+  </ul>
+</section>

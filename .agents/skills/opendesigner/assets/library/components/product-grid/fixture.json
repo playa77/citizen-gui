@@ -1,0 +1,258 @@
+{
+ "title": "Wool coats under £200 in size M",
+ "note": "6 of 11 results",
+ "items": [
+  {
+   "photo": {
+    "src": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=800&h=1000&fit=crop&auto=format&q=70",
+    "alt": "Camel wool coat with a tie belt, worn against a stone wall",
+    "width": 800,
+    "height": 1000
+   },
+   "name": "Camel belted wool coat",
+   "price": "£189",
+   "status": "In stock",
+   "tone": "success",
+   "colours": [
+    {
+     "name": "Camel",
+     "swatch": "camel"
+    },
+    {
+     "name": "Ink",
+     "swatch": "ink"
+    }
+   ],
+   "sizes": [
+    {
+     "label": "S",
+     "sold_out": "false"
+    },
+    {
+     "label": "M",
+     "sold_out": "false"
+    },
+    {
+     "label": "L",
+     "sold_out": "false"
+    }
+   ],
+   "open": {
+    "label": "View",
+    "event": {
+     "name": "open_product",
+     "context": {
+      "sku": "coat-camel"
+     }
+    }
+   }
+  },
+  {
+   "photo": {
+    "src": "https://images.unsplash.com/photo-1591900947067-851789555ef3?w=800&h=1000&fit=crop&auto=format&q=70",
+    "alt": "Red hooded wrap coat with a belt, worn with jeans",
+    "width": 800,
+    "height": 1000
+   },
+   "name": "Red hooded wrap coat",
+   "price": "£149",
+   "old_price": "£199",
+   "status": "Only 2 left in M",
+   "tone": "warning",
+   "colours": [
+    {
+     "name": "Cherry",
+     "swatch": "cherry"
+    },
+    {
+     "name": "Midnight",
+     "swatch": "midnight"
+    }
+   ],
+   "sizes": [
+    {
+     "label": "S",
+     "sold_out": "false"
+    },
+    {
+     "label": "M",
+     "sold_out": "false"
+    },
+    {
+     "label": "L",
+     "sold_out": "true"
+    }
+   ],
+   "open": {
+    "label": "View",
+    "event": {
+     "name": "open_product",
+     "context": {
+      "sku": "coat-red"
+     }
+    }
+   }
+  },
+  {
+   "photo": {
+    "src": "https://images.unsplash.com/photo-1550872199-63f4382fe925?w=800&h=1000&fit=crop&auto=format&q=70",
+    "alt": "Long beige wrap coat with a wide collar, worn over a red dress",
+    "width": 800,
+    "height": 1000
+   },
+   "name": "Beige shawl-collar coat",
+   "price": "£172",
+   "status": "In stock",
+   "tone": "success",
+   "colours": [
+    {
+     "name": "Sand",
+     "swatch": "sand"
+    }
+   ],
+   "sizes": [
+    {
+     "label": "M",
+     "sold_out": "false"
+    },
+    {
+     "label": "L",
+     "sold_out": "false"
+    }
+   ],
+   "open": {
+    "label": "View",
+    "event": {
+     "name": "open_product",
+     "context": {
+      "sku": "coat-shawl"
+     }
+    }
+   }
+  },
+  {
+   "photo": {
+    "src": "https://images.unsplash.com/photo-1707303294967-d0ccd0809cf2?w=800&h=1000&fit=crop&auto=format&q=70",
+    "alt": "Long black coat worn with boots and a white knitted headscarf",
+    "width": 800,
+    "height": 1000
+   },
+   "name": "Black tailored coat",
+   "price": "£195",
+   "status": "In stock",
+   "tone": "success",
+   "colours": [
+    {
+     "name": "Ink",
+     "swatch": "ink"
+    },
+    {
+     "name": "Charcoal",
+     "swatch": "charcoal"
+    }
+   ],
+   "sizes": [
+    {
+     "label": "S",
+     "sold_out": "false"
+    },
+    {
+     "label": "M",
+     "sold_out": "false"
+    }
+   ],
+   "open": {
+    "label": "View",
+    "event": {
+     "name": "open_product",
+     "context": {
+      "sku": "coat-black"
+     }
+    }
+   }
+  },
+  {
+   "photo": {
+    "src": "https://images.unsplash.com/photo-1608635680046-aebf91c1a9c8?w=800&h=1000&fit=crop&auto=format&q=70",
+    "alt": "Beige single-breasted coat with large buttons, worn over a black dress",
+    "width": 800,
+    "height": 1000
+   },
+   "name": "Single-breasted tan coat",
+   "price": "£158",
+   "old_price": "£184",
+   "status": "Ships Friday",
+   "tone": "neutral",
+   "colours": [
+    {
+     "name": "Camel",
+     "swatch": "camel"
+    }
+   ],
+   "sizes": [
+    {
+     "label": "S",
+     "sold_out": "false"
+    },
+    {
+     "label": "M",
+     "sold_out": "false"
+    }
+   ],
+   "open": {
+    "label": "View",
+    "event": {
+     "name": "open_product",
+     "context": {
+      "sku": "coat-tan"
+     }
+    }
+   }
+  },
+  {
+   "photo": {
+    "src": "https://images.unsplash.com/photo-1586081493946-c75071ee57c0?w=800&h=1000&fit=crop&auto=format&q=70",
+    "alt": "Long blue-grey wool coat worn open over a black jumper",
+    "width": 800,
+    "height": 1000
+   },
+   "name": "Blue-grey long coat",
+   "price": "£165",
+   "status": "Sold out",
+   "tone": "danger",
+   "colours": [
+    {
+     "name": "Sky",
+     "swatch": "sky"
+    },
+    {
+     "name": "Ash",
+     "swatch": "ash"
+    }
+   ],
+   "sizes": [
+    {
+     "label": "S",
+     "sold_out": "true"
+    },
+    {
+     "label": "M",
+     "sold_out": "true"
+    },
+    {
+     "label": "L",
+     "sold_out": "true"
+    }
+   ],
+   "open": {
+    "label": "View",
+    "event": {
+     "name": "open_product",
+     "context": {
+      "sku": "coat-bluegrey"
+     }
+    }
+   }
+  }
+ ]
+}

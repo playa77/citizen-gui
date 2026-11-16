@@ -1,0 +1,84 @@
+{
+ "title": "Quiet cafés near Mill Street",
+ "note": "3 places within 10 minutes",
+ "places": [
+  {
+   "photo": {
+    "src": "https://images.unsplash.com/photo-1567880905822-56f8e06fe630?w=960&h=600&fit=crop&auto=format&q=70",
+    "alt": "Bright café with arched windows, a long wooden counter and a menu board on the wall",
+    "width": 960,
+    "height": 600
+   },
+   "name": "The Reading Room",
+   "rating": 4.8,
+   "reviews": "214",
+   "area": "Mill Street",
+   "price_band": "£",
+   "distance": "6 min walk",
+   "why": "Quiet, with sockets at every table",
+   "status": "Open until 20:00",
+   "tone": "success",
+   "open": {
+    "label": "View",
+    "event": {
+     "name": "open_place",
+     "context": {
+      "place": "reading-room"
+     }
+    }
+   }
+  },
+  {
+   "photo": {
+    "src": "https://images.unsplash.com/photo-1511081692775-05d0f180a065?w=960&h=600&fit=crop&auto=format&q=70",
+    "alt": "Café counter under hanging bulbs, with menu boards and a long wooden table",
+    "width": 960,
+    "height": 600
+   },
+   "name": "Kiln Coffee",
+   "rating": 4.6,
+   "reviews": "131",
+   "area": "Tanners Yard",
+   "price_band": "£",
+   "distance": "9 min walk",
+   "why": "Long tables and fast Wi-Fi",
+   "status": "Busy after 12:00",
+   "tone": "warning",
+   "open": {
+    "label": "View",
+    "event": {
+     "name": "open_place",
+     "context": {
+      "place": "kiln-coffee"
+     }
+    }
+   }
+  },
+  {
+   "photo": {
+    "src": "https://images.unsplash.com/photo-1770739539412-d9e1021429cf?w=960&h=600&fit=crop&auto=format&q=70",
+    "alt": "Dark café with warm lamps, low chairs and bar stools on a wooden floor",
+    "width": 960,
+    "height": 600
+   },
+   "name": "Hollow Bean",
+   "rating": 4.7,
+   "reviews": "88",
+   "area": "Church Lane",
+   "price_band": "££",
+   "distance": "4 min walk",
+   "why": "Soft seats and no music",
+   "status": "Open until 18:00",
+   "tone": "success",
+   "open": {
+    "label": "View",
+    "event": {
+     "name": "open_place",
+     "context": {
+      "place": "hollow-bean"
+     }
+    }
+   }
+  }
+ ]
+}

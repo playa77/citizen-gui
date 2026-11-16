@@ -1,0 +1,80 @@
+<!-- Icons: Lucide (lucide.dev), ISC licence -->
+<style>
+.odl-home-listing { box-sizing: border-box; inline-size: 100%; max-inline-size: 52rem; margin-inline: auto; container-type: inline-size; color: var(--ds-color-text-primary); font: var(--ds-text-body-md); text-wrap: pretty; }
+.odl-home-listing *, .odl-home-listing *::before, .odl-home-listing *::after { box-sizing: border-box; }
+.odl-home-listing .odl-card { display: grid; overflow: hidden; background: var(--ds-color-surface-raised); border: var(--ds-border-width-default) solid var(--ds-color-border-subtle);
+  border-radius: var(--ds-radius-container); box-shadow: var(--ds-elevation-raised); }
+.odl-home-listing .odl-ph::after { content: none; }
+.odl-home-listing .odl-body { display: grid; align-content: start; gap: var(--ds-space-stack-sm); padding: var(--ds-space-inset-lg); min-inline-size: 0; }
+.odl-home-listing .odl-head { display: grid; gap: var(--ds-space-stack-xs); }
+.odl-home-listing h3 { margin: 0; font: var(--ds-text-title-md); overflow-wrap: anywhere; }
+.odl-home-listing .odl-kicker { margin: 0; color: var(--ds-color-text-secondary); font: var(--ds-text-label-md); }
+.odl-home-listing .odl-facts { display: flex; flex-wrap: wrap; gap: var(--ds-space-stack-xs) var(--ds-space-inline-md); margin: 0; padding: 0; list-style: none; color: var(--ds-color-text-secondary); font: var(--ds-text-body-sm); font-variant-numeric: tabular-nums; }
+.odl-home-listing .odl-facts li { display: inline-flex; align-items: center; gap: var(--ds-space-inline-sm); white-space: nowrap; }
+.odl-home-listing .odl-facts svg { flex: none; inline-size: var(--ds-size-icon-sm); block-size: var(--ds-size-icon-sm); stroke-width: var(--ds-icon-stroke-md); }
+.odl-home-listing .odl-acts { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ds-space-stack-sm) var(--ds-space-inline-md); margin-block-start: var(--ds-space-stack-sm); }
+.odl-home-listing .odl-price { display: grid; margin: 0; font-variant-numeric: tabular-nums; }
+.odl-home-listing .odl-price strong { font: var(--ds-text-title-md); font-weight: var(--ds-font-weight-heading); }
+.odl-home-listing .odl-price span { color: var(--ds-color-text-secondary); font: var(--ds-text-label-md); }
+.odl-home-listing .odl-btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--ds-space-inline-sm); min-block-size: max(var(--ds-size-control-md), var(--ds-size-target-min));
+  padding: 0 var(--ds-space-inset-lg); border: var(--ds-border-width-default) solid transparent; border-radius: var(--ds-radius-control); background: var(--ds-color-bg-action-primary);
+  color: var(--ds-color-text-on-action); font: var(--ds-text-label-lg); font-weight: var(--ds-font-weight-label); cursor: pointer;
+  transition: background-color var(--ds-motion-duration-short) var(--ds-motion-easing-standard); }
+.odl-home-listing .odl-btn:hover { background: var(--ds-color-bg-action-primary-hover); }
+.odl-home-listing .odl-btn.is-quiet { border-color: var(--ds-color-border-default); background: var(--ds-color-surface-raised); color: var(--ds-color-text-primary); }
+.odl-home-listing .odl-btn.is-quiet:hover { background: var(--ds-color-bg-neutral-subtle); }
+.odl-home-listing .odl-btn:focus-visible { outline: var(--ds-focus-ring-width) solid var(--ds-color-border-focus); outline-offset: var(--ds-focus-ring-offset); }
+.odl-home-listing .odl-btn:disabled { cursor: not-allowed; border-color: var(--ds-color-border-subtle); background: var(--ds-color-bg-neutral-subtle); color: var(--ds-color-text-secondary); }
+.odl-home-listing .odl-btn svg { inline-size: var(--ds-size-icon-sm); block-size: var(--ds-size-icon-sm); stroke-width: var(--ds-icon-stroke-md); }
+.odl-home-listing .odl-body > .odl-status { min-block-size: 0; padding-inline: 0; background: transparent; }
+/* the photos: one large, two more beside it when there is room */
+.odl-home-listing .odl-pics { display: grid; gap: var(--ds-space-2); margin: 0; padding: 0; list-style: none; }
+.odl-home-listing .odl-pics .odl-ph { aspect-ratio: 4 / 3; min-block-size: 10rem; }
+.odl-home-listing .odl-pics > li:first-child .odl-ph { border-start-start-radius: calc(var(--ds-radius-container) - var(--ds-border-width-default)); border-start-end-radius: calc(var(--ds-radius-container) - var(--ds-border-width-default)); border-end-start-radius: 0; border-end-end-radius: 0; }
+.odl-home-listing .odl-pics .odl-ph::after { content: none; }
+.odl-home-listing .odl-pics > li:not(:first-child) { display: none; }
+@container (min-width: 36rem) {
+  .odl-home-listing .odl-pics { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); grid-auto-rows: minmax(0, 1fr); aspect-ratio: 2 / 1; }
+  .odl-home-listing .odl-pics > li:first-child { grid-row: span 2; }
+  .odl-home-listing .odl-pics > li:nth-child(-n+3) { display: block; }
+  .odl-home-listing .odl-pics .odl-ph { aspect-ratio: auto; block-size: 100%; min-block-size: 0; }
+  .odl-home-listing .odl-pics > li:first-child .odl-ph { border-start-end-radius: 0; }
+  .odl-home-listing .odl-pics > li:nth-child(2) .odl-ph { border-start-end-radius: calc(var(--ds-radius-container) - var(--ds-border-width-default)); }
+  .odl-home-listing .odl-body { padding: var(--ds-space-inset-xl); }
+}
+.odl-home-listing .odl-top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--ds-space-stack-xs) var(--ds-space-inline-md); }
+.odl-home-listing .odl-top .odl-price strong { font: var(--ds-text-title-lg); font-weight: var(--ds-font-weight-heading); }
+.odl-home-listing .odl-where { margin: 0; color: var(--ds-color-text-secondary); font: var(--ds-text-body-md); overflow-wrap: anywhere; }
+.odl-home-listing .odl-ph { position: relative; inline-size: 100%; overflow: hidden; background: var(--ds-color-surface-sunken); }
+.odl-home-listing .odl-ph::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 var(--ds-border-width-default) var(--ds-color-border-subtle); pointer-events: none; }
+.odl-home-listing .odl-ph .odl-img { position: absolute; inset: 0; display: block; inline-size: 100%; block-size: 100%; aspect-ratio: auto; object-fit: cover; }
+.odl-home-listing .odl-status { display: inline-flex; align-items: center; gap: var(--ds-space-inline-sm); inline-size: fit-content; max-inline-size: 100%; min-block-size: var(--ds-size-control-sm);
+  padding: 0 var(--ds-space-inset-sm); border-radius: var(--ds-radius-full); background: var(--ds-color-surface-raised); color: var(--ds-color-text-secondary);
+  font: var(--ds-text-label-md); font-weight: var(--ds-font-weight-label); }
+.odl-home-listing .odl-status::before { content: ""; flex: none; inline-size: var(--ds-space-6); block-size: var(--ds-space-6); border-radius: var(--ds-radius-full); background: currentColor; }
+.odl-home-listing .odl-status[data-tone="neutral"] { color: var(--ds-color-text-secondary); }
+.odl-home-listing .odl-status[data-tone="success"] { color: var(--ds-color-text-success); }
+.odl-home-listing .odl-status[data-tone="warning"] { color: var(--ds-color-text-warning); }
+.odl-home-listing .odl-status[data-tone="danger"] { color: var(--ds-color-text-danger); }
+.odl-home-listing [data-od-item][hidden] { display: none; }
+.odl-home-listing .odl-sr { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .odl-home-listing, .odl-home-listing *, .odl-home-listing *::before { transition: none !important; animation: none !important; } }
+</style>
+<article class="odl-home-listing" aria-label="Two-bedroom house on Orchard Close" data-od-label="title">
+  <div class="odl-card">
+    <ul class="odl-pics" data-od-list="photos" aria-label="Photos"><li data-od-item data-od-template hidden><div class="odl-ph"><img class="odl-img" data-od-media="photo" src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=640&amp;h=480&amp;fit=crop&amp;auto=format&amp;q=70" alt="" width="320" height="240" loading="lazy" decoding="async"></div></li><li data-od-item><div class="odl-ph"><img class="odl-img" data-od-media="photo" src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=640&amp;h=480&amp;fit=crop&amp;auto=format&amp;q=70" alt="Grey wooden house with a lawn" width="320" height="240" loading="lazy" decoding="async"></div></li><li data-od-item><div class="odl-ph"><img class="odl-img" data-od-media="photo" src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=640&amp;h=480&amp;fit=crop&amp;auto=format&amp;q=70" alt="Holiday-rental living room with a large window" width="320" height="240" loading="lazy" decoding="async"></div></li><li data-od-item><div class="odl-ph"><img class="odl-img" data-od-media="photo" src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=640&amp;h=480&amp;fit=crop&amp;auto=format&amp;q=70" alt="Bedroom with a blue headboard" width="320" height="240" loading="lazy" decoding="async"></div></li></ul>
+    <div class="odl-body">
+      <div class="odl-top">
+        <div class="odl-head"><h3 data-od-slot="title">Two-bedroom house on Orchard Close</h3><p class="odl-where" data-od-slot="address">Orchard Close, Fernhollow</p></div>
+        <p class="odl-price"><strong data-od-slot="price">£1,450</strong><span data-od-slot="price_note" data-od-optional>a month, bills not included</span></p>
+      </div>
+      <ul class="odl-facts">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8"/><path d="M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4"/><path d="M12 4v6"/><path d="M2 18h20"/></svg><span data-od-slot="beds">2 bedrooms</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 4 8 6"/><path d="M17 19v2"/><path d="M2 12h20"/><path d="M7 19v2"/><path d="M9 5 7.621 3.621A2.121 2.121 0 0 0 4 5v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/></svg><span data-od-slot="baths">1 bathroom</span></li>
+        <li data-od-optional><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></svg><span data-od-slot="area">74 m²</span></li>
+      </ul>
+      <p class="odl-status" data-od-slot="status" data-od-var="tone" data-tone="success" data-od-optional>Available from 1 December</p>
+      <div class="odl-acts"><button type="button" class="odl-btn" data-od-action="viewing"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg><span data-od-slot="label">Book a viewing</span></button></div>
+    </div>
+  </div>
+</article>

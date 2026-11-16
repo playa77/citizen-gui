@@ -1,0 +1,176 @@
+{
+  "name": "Success confirmation",
+  "summary": "The screen after a task is done: what happened in one line, the key details to keep, what happens next, and where to go from here.",
+  "use": "after a form or flow that someone will want proof of (a payment, an order, a sent invoice, a booking)",
+  "type": "states",
+  "style": "quiet",
+  "industries": [
+    "any"
+  ],
+  "tags": [
+    "success",
+    "confirmation",
+    "receipt",
+    "done",
+    "next steps"
+  ],
+  "states": [
+    "done",
+    "hover",
+    "focus"
+  ],
+  "source": null,
+  "a11y": "When this screen replaces the form, move focus to its heading (it has tabindex -1 for that), so it is read first; the part never moves focus on its own. Details are a description list.",
+  "width": "narrow",
+  "live_region": "none",
+  "notes": "Move focus to the heading when this screen replaces the form.",
+  "spec": {
+    "use_when": [
+      "a multi-step flow or important form has finished",
+      "the person may need a reference or receipt"
+    ],
+    "avoid_when": [
+      "a small, quick change: a toast is enough (toast-undo)",
+      "nothing changed yet (the request is pending): say it's pending, not done"
+    ],
+    "parts": [
+      {
+        "name": "title",
+        "selector": ".odl-success-confirmation [data-od-slot=\"title\"]",
+        "what": "the heading: what happened, in plain words, as in “Invoice sent”",
+        "slot": "text"
+      },
+      {
+        "name": "message",
+        "selector": ".odl-success-confirmation [data-od-slot=\"message\"]",
+        "what": "one or two sentences: what it means and what to do next, as in “Gorsedown Print will get INV-2042 by email in a ”",
+        "slot": "text"
+      },
+      {
+        "name": "details",
+        "selector": ".odl-success-confirmation [data-od-list=\"details\"]",
+        "what": "the details, one item each",
+        "slot": "list"
+      },
+      {
+        "name": "details.label",
+        "selector": ".odl-success-confirmation [data-od-list=\"details\"] [data-od-slot=\"label\"]",
+        "what": "the visible label, as in “Amount”",
+        "slot": "text"
+      },
+      {
+        "name": "details.value",
+        "selector": ".odl-success-confirmation [data-od-list=\"details\"] [data-od-slot=\"value\"]",
+        "what": "what the person typed, as in “$4,280.00”",
+        "slot": "text"
+      },
+      {
+        "name": "next",
+        "selector": ".odl-success-confirmation [data-od-slot=\"next\"]",
+        "what": "what happens next, as in “We'll email you when they open it and when they ”",
+        "slot": "text"
+      },
+      {
+        "name": "view",
+        "selector": ".odl-success-confirmation [data-od-action=\"view\"]",
+        "what": "the View invoice action",
+        "slot": "action"
+      },
+      {
+        "name": "another",
+        "selector": ".odl-success-confirmation [data-od-action=\"another\"]",
+        "what": "the Send another action",
+        "slot": "action"
+      }
+    ],
+    "data": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "maxLength": 24,
+          "part": "title"
+        },
+        "message": {
+          "type": "string",
+          "maxLength": 80,
+          "part": "message"
+        },
+        "details": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": {
+                "type": "string",
+                "maxLength": 24,
+                "part": "details.label"
+              },
+              "value": {
+                "type": "string",
+                "maxLength": 24,
+                "part": "details.value"
+              }
+            },
+            "required": [
+              "label",
+              "value"
+            ]
+          },
+          "part": "details"
+        },
+        "next": {
+          "type": "string",
+          "maxLength": 80,
+          "part": "next"
+        }
+      },
+      "required": [
+        "title",
+        "message",
+        "details",
+        "next"
+      ]
+    },
+    "edge": {
+      "empty": {
+        "status": "handled",
+        "evidence": "data-od-list",
+        "how": "the Smart UI renderer puts one plain 'Nothing to show yet.' line in an empty list"
+      },
+      "loading": {
+        "status": "handled",
+        "evidence": "data-od-slot",
+        "how": "the Smart UI renderer draws each marked slot as a quiet block of its size while the data arrives; the static file shows the filled part"
+      },
+      "error": {
+        "status": "not_built",
+        "how": "If the task failed, don't show this; return to the form with page-banners and the person's values kept."
+      },
+      "disabled": {
+        "status": "not_built",
+        "how": "No control here is ever disabled; each one always does something."
+      },
+      "overflow": {
+        "status": "handled",
+        "how": "Long values such as email addresses break anywhere instead of overflowing.",
+        "evidence": "overflow-wrap: anywhere"
+      },
+      "long_text": {
+        "status": "handled",
+        "how": "Titles balance and body text wraps at word boundaries inside a capped measure.",
+        "evidence": "text-wrap"
+      },
+      "missing_image": {
+        "status": "none",
+        "how": "the part has no photo"
+      }
+    },
+    "keyboard": [
+      "Focus moves to the heading when the screen appears",
+      "Tab then reaches View invoice and Send another"
+    ]
+  }
+}

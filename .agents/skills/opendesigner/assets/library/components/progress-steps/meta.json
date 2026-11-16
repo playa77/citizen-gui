@@ -1,0 +1,182 @@
+{
+  "name": "Progress with steps",
+  "summary": "Progress for a long task: a bar with a percentage, the time left, each step done, now and next, and a way to keep working while it runs.",
+  "use": "for long tasks (imports, exports, uploads, migrations) that take more than a few seconds",
+  "type": "states",
+  "style": "quiet",
+  "industries": [
+    "any"
+  ],
+  "tags": [
+    "progress",
+    "steps",
+    "import",
+    "long task",
+    "background"
+  ],
+  "states": [
+    "step done",
+    "current step",
+    "next step",
+    "in progress",
+    "hover",
+    "focus"
+  ],
+  "source": null,
+  "a11y": "The bar is a progressbar with a value and a text value; steps are an ordered list with the current one marked aria-current; a polite status line names the current step; update it when the step changes, not on every percent.",
+  "width": "medium",
+  "live_region": "polite",
+  "notes": "Switch from inline-spinner to this once a task is expected to pass the system's --ds-state-wait-progress-after (10 seconds where the system has it).",
+  "spec": {
+    "use_when": [
+      "a task takes longer than about 10 seconds",
+      "the task has steps the person would recognise"
+    ],
+    "avoid_when": [
+      "waits of a few seconds: use inline-spinner",
+      "unknown length with no steps: say what is happening and show an indeterminate bar"
+    ],
+    "parts": [
+      {
+        "name": "title",
+        "selector": ".odl-progress-steps [data-od-slot=\"title\"]",
+        "what": "the heading: what happened, in plain words, as in “Importing 4,812 contacts”",
+        "slot": "text"
+      },
+      {
+        "name": "progress",
+        "selector": ".odl-progress-steps [data-od-measure=\"progress\"]",
+        "what": "how far the task has got, 0 to 1",
+        "slot": "number"
+      },
+      {
+        "name": "left",
+        "selector": ".odl-progress-steps [data-od-slot=\"left\"]",
+        "what": "time left and what the person can do meanwhile, as in “About 2 minutes left. You can close this page; w”",
+        "slot": "text"
+      },
+      {
+        "name": "steps",
+        "selector": ".odl-progress-steps [data-od-list=\"steps\"]",
+        "what": "the steps, one item each",
+        "slot": "list"
+      },
+      {
+        "name": "steps.state",
+        "selector": ".odl-progress-steps [data-od-list=\"steps\"] [data-od-var=\"state\"]",
+        "what": "done, now or next",
+        "slot": "text"
+      },
+      {
+        "name": "steps.label",
+        "selector": ".odl-progress-steps [data-od-list=\"steps\"] [data-od-slot=\"label\"]",
+        "what": "the visible label, as in “Upload file”",
+        "slot": "text"
+      },
+      {
+        "name": "cancel",
+        "selector": ".odl-progress-steps [data-od-action=\"cancel\"]",
+        "what": "the Cancel import action",
+        "slot": "action"
+      },
+      {
+        "name": "background",
+        "selector": ".odl-progress-steps [data-od-action=\"background\"]",
+        "what": "the Keep working action",
+        "slot": "action"
+      }
+    ],
+    "data": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "maxLength": 32,
+          "part": "title"
+        },
+        "progress": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "part": "progress"
+        },
+        "left": {
+          "type": "string",
+          "maxLength": 96,
+          "part": "left"
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "properties": {
+              "state": {
+                "enum": [
+                  "done",
+                  "next",
+                  "now"
+                ],
+                "part": "steps.state"
+              },
+              "label": {
+                "type": "string",
+                "maxLength": 24,
+                "part": "steps.label"
+              }
+            },
+            "required": [
+              "state",
+              "label"
+            ]
+          },
+          "part": "steps"
+        }
+      },
+      "required": [
+        "title",
+        "progress",
+        "left",
+        "steps"
+      ]
+    },
+    "edge": {
+      "empty": {
+        "status": "handled",
+        "evidence": "data-od-list",
+        "how": "the Smart UI renderer puts one plain 'Nothing to show yet.' line in an empty list"
+      },
+      "loading": {
+        "status": "shown",
+        "how": "This part is the long-wait state: a bar, a percentage and the steps.",
+        "evidence": "role=\"progressbar\""
+      },
+      "error": {
+        "status": "not_built",
+        "how": "A failed step should turn its dot to the danger colour, say what failed and offer Retry from that step; not drawn here."
+      },
+      "disabled": {
+        "status": "not_built",
+        "how": "No control here is ever disabled; each one always does something."
+      },
+      "overflow": {
+        "status": "handled",
+        "how": "Buttons stack under 26rem.",
+        "evidence": "column-reverse"
+      },
+      "long_text": {
+        "status": "handled",
+        "how": "Titles balance and body text wraps at word boundaries inside a capped measure.",
+        "evidence": "text-wrap"
+      },
+      "missing_image": {
+        "status": "none",
+        "how": "the part has no photo"
+      }
+    },
+    "keyboard": [
+      "Tab reaches Cancel import, then Keep working"
+    ]
+  }
+}

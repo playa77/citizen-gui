@@ -1,0 +1,243 @@
+{
+  "name": "Place card",
+  "summary": "One place in depth: a photo, the name and rating, area, price band and distance, whether it is open, why it fits what the person asked, the address, and a Get directions button. The photo sits beside the words when there is room.",
+  "use": "when an assistant recommends one place (\"where should I take my parents for lunch?\") or the person opens one from a list",
+  "type": "content",
+  "style": "friendly",
+  "industries": [
+    "food",
+    "travel",
+    "events",
+    "any"
+  ],
+  "tags": [
+    "place",
+    "recommendation",
+    "photo",
+    "rating",
+    "card"
+  ],
+  "states": [
+    "open now",
+    "closing soon",
+    "fully booked",
+    "no address",
+    "hover",
+    "focus",
+    "photo on top when narrow",
+    "photo beside when wide"
+  ],
+  "source": null,
+  "a11y": "An article named by the place; the rating is read as \"Rated 4.7 out of 5\", open or closed is words as well as colour, and both buttons are real buttons.",
+  "width": "medium",
+  "photos": [
+    {
+      "img": "photo-1616141037618-d671075fd1a1",
+      "author": "Angela Lo",
+      "page": "kMyevb36Ak8"
+    }
+  ],
+  "spec": {
+    "use_when": [
+      "one recommended place, with why it fits"
+    ],
+    "avoid_when": [
+      "three to five places to choose from: use place-list",
+      "only the address and a map: use location-card"
+    ],
+    "parts": [
+      {
+        "name": "photo",
+        "selector": ".odl-ph .odl-img",
+        "what": "a photo of the place",
+        "slot": "media"
+      },
+      {
+        "name": "rating",
+        "selector": ".odl-rate",
+        "what": "the average rating out of 5 and how many reviews",
+        "slot": "number"
+      },
+      {
+        "name": "meta",
+        "selector": ".odl-meta",
+        "what": "the area, the price band and how far it is",
+        "slot": "text"
+      },
+      {
+        "name": "status",
+        "selector": ".odl-status",
+        "what": "open now, closing soon or fully booked, coloured by the data's meaning",
+        "slot": "text"
+      },
+      {
+        "name": "name",
+        "selector": ".odl-place-card h3",
+        "what": "the place's name",
+        "slot": "text"
+      },
+      {
+        "name": "why",
+        "selector": ".odl-fit",
+        "what": "why it fits what the person asked for",
+        "slot": "text"
+      },
+      {
+        "name": "address",
+        "selector": ".odl-where",
+        "what": "the address or how to find it",
+        "slot": "text"
+      },
+      {
+        "name": "directions",
+        "selector": ".odl-go",
+        "what": "the main action: directions",
+        "slot": "action"
+      },
+      {
+        "name": "open",
+        "selector": ".odl-acts button:not(.odl-go)",
+        "what": "an optional quieter action (the menu, the website)",
+        "slot": "action"
+      }
+    ],
+    "data": {
+      "type": "object",
+      "required": [
+        "photo",
+        "name",
+        "area"
+      ],
+      "properties": {
+        "photo": {
+          "type": "object",
+          "part": "photo",
+          "required": [
+            "src",
+            "alt"
+          ],
+          "properties": {
+            "src": {
+              "type": "string",
+              "maxLength": 2048
+            },
+            "alt": {
+              "type": "string",
+              "maxLength": 200
+            },
+            "width": {
+              "type": "integer"
+            },
+            "height": {
+              "type": "integer"
+            },
+            "ratio": {
+              "type": "string",
+              "maxLength": 12
+            },
+            "credit": {
+              "type": "string",
+              "maxLength": 120
+            }
+          }
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 40,
+          "part": "name"
+        },
+        "rating": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5,
+          "part": "rating"
+        },
+        "reviews": {
+          "type": "string",
+          "maxLength": 8,
+          "part": "rating"
+        },
+        "area": {
+          "type": "string",
+          "maxLength": 32,
+          "part": "meta"
+        },
+        "price_band": {
+          "type": "string",
+          "maxLength": 6,
+          "part": "meta"
+        },
+        "distance": {
+          "type": "string",
+          "maxLength": 20,
+          "part": "meta"
+        },
+        "why": {
+          "type": "string",
+          "maxLength": 140,
+          "part": "why"
+        },
+        "status": {
+          "type": "string",
+          "maxLength": 28,
+          "part": "status"
+        },
+        "tone": {
+          "type": "string",
+          "enum": [
+            "neutral",
+            "success",
+            "warning",
+            "danger"
+          ],
+          "part": "status"
+        },
+        "address": {
+          "type": "string",
+          "maxLength": 80,
+          "part": "address"
+        }
+      }
+    },
+    "edge": {
+      "empty": {
+        "status": "not_built",
+        "how": "without a place, answer in text; the card is only for one place"
+      },
+      "loading": {
+        "status": "handled",
+        "how": "the photo box keeps its shape on the sunken surface and pulses quietly until the photo arrives",
+        "evidence": "aspect-ratio: 16 / 10"
+      },
+      "error": {
+        "status": "handled",
+        "how": "a photo that fails keeps its box, with an icon and the photo's description",
+        "evidence": "class=\"odl-img\""
+      },
+      "disabled": {
+        "status": "shown",
+        "how": "a disabled button turns quiet neutral, still readable",
+        "evidence": "button:disabled"
+      },
+      "overflow": {
+        "status": "handled",
+        "how": "in a narrow container the photo goes on top and the buttons wrap",
+        "evidence": "@container (min-width: 34rem)"
+      },
+      "long_text": {
+        "status": "handled",
+        "how": "the name and lines wrap, long words break",
+        "evidence": "overflow-wrap: anywhere"
+      },
+      "missing_image": {
+        "status": "handled",
+        "evidence": "data-od-media",
+        "how": "the Smart UI renderer swaps a photo that fails to load for a calm tile of the same shape with an icon and its alt text"
+      }
+    },
+    "keyboard": [
+      "Tab reaches Get directions, then the second button when there is one",
+      "Enter or Space presses it"
+    ]
+  }
+}

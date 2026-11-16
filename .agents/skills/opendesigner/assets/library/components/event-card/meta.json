@@ -1,0 +1,222 @@
+{
+  "name": "Event card",
+  "summary": "One event to go to: a photo, the name, the date and venue, the price with its currency, and how many seats are left as a status (sold out is never green), with a button to choose seats.",
+  "use": "when someone asks what is on, or about one event",
+  "type": "commerce",
+  "style": "friendly",
+  "industries": [
+    "events",
+    "media",
+    "travel",
+    "any"
+  ],
+  "tags": [
+    "event",
+    "tickets",
+    "photo",
+    "availability",
+    "card"
+  ],
+  "states": [
+    "seats left",
+    "few left",
+    "sold out",
+    "photo beside when wide",
+    "stacked when narrow",
+    "hover",
+    "focus",
+    "disabled"
+  ],
+  "source": null,
+  "a11y": "An article named by the event; date and venue are read with their labels, and seats left is words as well as colour.",
+  "width": "medium",
+  "photos": [
+    {
+      "img": "photo-1470229722913-7c0e2dbbafd3",
+      "author": "Yvette de Wit",
+      "page": "NYrVisodQ2M"
+    }
+  ],
+  "spec": {
+    "use_when": [
+      "one event with a date, a place and tickets"
+    ],
+    "avoid_when": [
+      "a ticket already bought, with seat and code: use event-ticket",
+      "several events: use result-list"
+    ],
+    "parts": [
+      {
+        "name": "photo",
+        "selector": ".odl-ph .odl-img",
+        "what": "a photo of the event or the place",
+        "slot": "media"
+      },
+      {
+        "name": "kicker",
+        "selector": ".odl-kicker",
+        "what": "the kind of event",
+        "slot": "text"
+      },
+      {
+        "name": "title",
+        "selector": ".odl-event-card h3",
+        "what": "the event's name",
+        "slot": "text"
+      },
+      {
+        "name": "facts",
+        "selector": ".odl-facts",
+        "what": "date and time, and the venue",
+        "slot": "text"
+      },
+      {
+        "name": "status",
+        "selector": ".odl-status",
+        "what": "seats or tickets left, coloured by what it says",
+        "slot": "text"
+      },
+      {
+        "name": "price",
+        "selector": ".odl-price",
+        "what": "the price with its currency, and a note",
+        "slot": "number"
+      },
+      {
+        "name": "tickets",
+        "selector": ".odl-btn",
+        "what": "the main action: choose seats or tickets",
+        "slot": "action"
+      }
+    ],
+    "data": {
+      "type": "object",
+      "required": [
+        "photo",
+        "title",
+        "date",
+        "venue",
+        "price"
+      ],
+      "properties": {
+        "photo": {
+          "type": "object",
+          "part": "photo",
+          "required": [
+            "src",
+            "alt"
+          ],
+          "properties": {
+            "src": {
+              "type": "string",
+              "maxLength": 2048
+            },
+            "alt": {
+              "type": "string",
+              "maxLength": 200
+            },
+            "width": {
+              "type": "integer"
+            },
+            "height": {
+              "type": "integer"
+            },
+            "ratio": {
+              "type": "string",
+              "maxLength": 12
+            },
+            "credit": {
+              "type": "string",
+              "maxLength": 120
+            }
+          }
+        },
+        "kicker": {
+          "type": "string",
+          "maxLength": 30,
+          "part": "kicker"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 60,
+          "part": "title"
+        },
+        "date": {
+          "type": "string",
+          "maxLength": 40,
+          "part": "facts"
+        },
+        "venue": {
+          "type": "string",
+          "maxLength": 60,
+          "part": "facts"
+        },
+        "status": {
+          "type": "string",
+          "maxLength": 30,
+          "part": "status"
+        },
+        "tone": {
+          "type": "string",
+          "enum": [
+            "neutral",
+            "success",
+            "warning",
+            "danger"
+          ],
+          "part": "status"
+        },
+        "price": {
+          "type": "string",
+          "maxLength": 20,
+          "part": "price"
+        },
+        "price_note": {
+          "type": "string",
+          "maxLength": 40,
+          "part": "price"
+        }
+      }
+    },
+    "edge": {
+      "empty": {
+        "status": "not_built",
+        "how": "without an event, answer in text"
+      },
+      "loading": {
+        "status": "handled",
+        "how": "the photo box keeps its 16:9 shape on the sunken surface and pulses quietly until the photo arrives",
+        "evidence": "aspect-ratio: 16 / 9"
+      },
+      "error": {
+        "status": "handled",
+        "how": "a photo that fails keeps its box, with an icon and the photo's description",
+        "evidence": "class=\"odl-img\""
+      },
+      "disabled": {
+        "status": "shown",
+        "how": "when it is sold out the app sends the button disabled; it turns quiet neutral, still readable",
+        "evidence": ".odl-btn:disabled"
+      },
+      "overflow": {
+        "status": "handled",
+        "how": "in a narrow container the photo goes on top and the price and button wrap",
+        "evidence": "@container (min-width: 36rem)"
+      },
+      "long_text": {
+        "status": "handled",
+        "how": "the name and lines wrap, long words break",
+        "evidence": "overflow-wrap: anywhere"
+      },
+      "missing_image": {
+        "status": "handled",
+        "evidence": "data-od-media",
+        "how": "the Smart UI renderer swaps a photo that fails to load for a calm tile of the same shape with an icon and its alt text"
+      }
+    },
+    "keyboard": [
+      "Tab reaches the button",
+      "Enter or Space presses it"
+    ]
+  }
+}

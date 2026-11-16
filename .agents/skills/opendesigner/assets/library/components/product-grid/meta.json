@@ -1,0 +1,326 @@
+{
+  "name": "Product grid",
+  "summary": "Four to eight products in a grid that goes one to four across by the space it has: a photo with a stock status, the name, the price with the old price struck out, colour swatches and the sizes in stock.",
+  "use": "when someone searches a shop (\"warm wool coats under £200 in size M\") and will open one product",
+  "type": "commerce",
+  "style": "friendly",
+  "industries": [
+    "retail",
+    "any"
+  ],
+  "tags": [
+    "products",
+    "grid",
+    "photo",
+    "price",
+    "stock",
+    "search"
+  ],
+  "states": [
+    "in stock",
+    "few left",
+    "sold out",
+    "on sale",
+    "size sold out",
+    "hover",
+    "focus",
+    "one to four across"
+  ],
+  "source": null,
+  "a11y": "A list of products; each card is one button named \"View, <product>\". Stock is words as well as colour, the old price is read as \"was £85\", a sold-out size is read as \"L, sold out\", and colours are named.",
+  "width": "wide",
+  "photos": [
+    {
+      "img": "photo-1646270968802-6bad28659329",
+      "author": "Meg MacDonald",
+      "page": "9cxiJMMUJZ4"
+    },
+    {
+      "img": "photo-1620799140408-edc6dcb6d633",
+      "author": "Mediamodifier",
+      "page": "7cERndkOyDw"
+    },
+    {
+      "img": "photo-1605733513597-a8f8341084e6",
+      "author": "mostafa mahmoudi",
+      "page": "J4DnKxz_3sA"
+    },
+    {
+      "img": "photo-1640901555383-7335ec5a6476",
+      "author": "Pablo Figueroa",
+      "page": "PfyljNniz_c"
+    }
+  ],
+  "spec": {
+    "use_when": [
+      "a shop search or a recommendation returns four to eight products to look through"
+    ],
+    "avoid_when": [
+      "one product with all its photos and sizes: use product-gallery",
+      "two or three products side by side: use comparison",
+      "one featured product with Add to bag: use product-card"
+    ],
+    "parts": [
+      {
+        "name": "title",
+        "selector": ".odl-product-grid h3",
+        "what": "what was searched, in the person's words",
+        "slot": "text"
+      },
+      {
+        "name": "note",
+        "selector": ".odl-note",
+        "what": "how many results",
+        "slot": "text"
+      },
+      {
+        "name": "items",
+        "selector": ".odl-grid",
+        "what": "the products",
+        "slot": "list"
+      },
+      {
+        "name": "photo",
+        "selector": ".odl-ph .odl-img",
+        "what": "the product photo, in a 4:5 box",
+        "slot": "media"
+      },
+      {
+        "name": "status",
+        "selector": ".odl-status",
+        "what": "stock, coloured by the data's meaning (sold out is never green)",
+        "slot": "text"
+      },
+      {
+        "name": "name",
+        "selector": ".odl-name",
+        "what": "the product name, two lines at most",
+        "slot": "text"
+      },
+      {
+        "name": "price",
+        "selector": ".odl-price",
+        "what": "the price with its currency, and the old price struck out",
+        "slot": "number"
+      },
+      {
+        "name": "colours",
+        "selector": ".odl-swatches",
+        "what": "colour swatches from the system's ramps, each named",
+        "slot": "list"
+      },
+      {
+        "name": "sizes",
+        "selector": ".odl-sizes",
+        "what": "sizes, with sold-out sizes struck out",
+        "slot": "list"
+      },
+      {
+        "name": "open",
+        "selector": ".odl-open",
+        "what": "the whole card opens the product",
+        "slot": "action"
+      }
+    ],
+    "data": {
+      "type": "object",
+      "required": [
+        "title",
+        "items"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "maxLength": 60,
+          "part": "title"
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 60,
+          "part": "note"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "part": "items",
+          "items": {
+            "type": "object",
+            "required": [
+              "photo",
+              "name",
+              "price"
+            ],
+            "properties": {
+              "photo": {
+                "type": "object",
+                "part": "photo",
+                "required": [
+                  "src",
+                  "alt"
+                ],
+                "properties": {
+                  "src": {
+                    "type": "string",
+                    "maxLength": 2048
+                  },
+                  "alt": {
+                    "type": "string",
+                    "maxLength": 200
+                  },
+                  "width": {
+                    "type": "integer"
+                  },
+                  "height": {
+                    "type": "integer"
+                  },
+                  "ratio": {
+                    "type": "string",
+                    "maxLength": 12
+                  },
+                  "credit": {
+                    "type": "string",
+                    "maxLength": 120
+                  }
+                }
+              },
+              "name": {
+                "type": "string",
+                "maxLength": 48,
+                "part": "name"
+              },
+              "price": {
+                "type": "string",
+                "maxLength": 16,
+                "part": "price"
+              },
+              "old_price": {
+                "type": "string",
+                "maxLength": 16,
+                "part": "price"
+              },
+              "status": {
+                "type": "string",
+                "maxLength": 28,
+                "part": "status"
+              },
+              "tone": {
+                "type": "string",
+                "enum": [
+                  "neutral",
+                  "success",
+                  "warning",
+                  "danger"
+                ],
+                "part": "status"
+              },
+              "colours": {
+                "type": "array",
+                "maxItems": 5,
+                "part": "colours",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "name",
+                    "swatch"
+                  ],
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "maxLength": 20
+                    },
+                    "swatch": {
+                      "type": "string",
+                      "enum": [
+                        "ash",
+                        "camel",
+                        "chalk",
+                        "charcoal",
+                        "cherry",
+                        "cocoa",
+                        "forest",
+                        "ink",
+                        "midnight",
+                        "moss",
+                        "rose",
+                        "rust",
+                        "sand",
+                        "sky",
+                        "stone"
+                      ]
+                    }
+                  }
+                }
+              },
+              "sizes": {
+                "type": "array",
+                "maxItems": 8,
+                "part": "sizes",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "label"
+                  ],
+                  "properties": {
+                    "label": {
+                      "type": "string",
+                      "maxLength": 10
+                    },
+                    "sold_out": {
+                      "type": "string",
+                      "enum": [
+                        "false",
+                        "true"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "edge": {
+      "empty": {
+        "status": "handled",
+        "how": "no products: the list says there is nothing to show; better still, answer in text with what to change",
+        "evidence": "data-od-list=\"items\""
+      },
+      "loading": {
+        "status": "handled",
+        "how": "each photo box keeps its 4:5 shape on the sunken surface and pulses quietly until the photo arrives, then fades in",
+        "evidence": "aspect-ratio: 4 / 5"
+      },
+      "error": {
+        "status": "handled",
+        "how": "a photo that fails keeps its box, with an icon and the photo's description",
+        "evidence": "class=\"odl-img\""
+      },
+      "disabled": {
+        "status": "shown",
+        "how": "a sold-out product says so in its status; a sold-out size is struck out and read as sold out",
+        "evidence": "[data-sold_out=\"true\"]"
+      },
+      "overflow": {
+        "status": "handled",
+        "how": "the grid goes 4, 3, 2 or 1 across by the width of its container, never the window",
+        "evidence": "@container (min-width: 48rem)"
+      },
+      "long_text": {
+        "status": "handled",
+        "how": "names stop at two lines, so prices line up across a row",
+        "evidence": "-webkit-line-clamp: 2"
+      },
+      "missing_image": {
+        "status": "handled",
+        "evidence": "data-od-media",
+        "how": "the Smart UI renderer swaps a photo that fails to load for a calm tile of the same shape with an icon and its alt text"
+      }
+    },
+    "keyboard": [
+      "Tab moves from card to card",
+      "Enter or Space opens the focused product"
+    ]
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "name": "Toast with undo",
+  "summary": "A toast that confirms an archive and offers Undo, which puts the item back where it was. It stays until it's used or closed.",
+  "use": "for reversible actions such as archive, move or remove, instead of asking 'Are you sure?' first",
+  "type": "states",
+  "style": "quiet",
+  "industries": [
+    "any"
+  ],
+  "tags": [
+    "toast",
+    "undo",
+    "snackbar",
+    "archive",
+    "confirmation"
+  ],
+  "states": [
+    "archived",
+    "restored",
+    "closed",
+    "hover",
+    "focus"
+  ],
+  "source": null,
+  "a11y": "A polite live region that is always on the page reads what was archived; after Archive, focus moves to Undo so keyboard users can reach it, and returns to the restored row or the list after Undo or close. Escape closes the toast. There is no timer, so nobody loses the chance to undo.",
+  "width": "medium",
+  "live_region": "polite",
+  "spec": {
+    "use_when": [
+      "the action can be undone for a while",
+      "the person should keep working without a dialog"
+    ],
+    "avoid_when": [
+      "the action can't be undone (deleting for good, sending money): use confirm-dialog",
+      "news about the whole page: use page-banners"
+    ],
+    "parts": [
+      {
+        "name": "messages",
+        "selector": ".odl-toast-undo [data-od-list=\"messages\"]",
+        "what": "the messages, one item each",
+        "slot": "list"
+      },
+      {
+        "name": "messages.from",
+        "selector": ".odl-toast-undo [data-od-list=\"messages\"] [data-od-slot=\"from\"]",
+        "what": "the from, as in “Quorbin Studio”",
+        "slot": "text"
+      },
+      {
+        "name": "messages.subject",
+        "selector": ".odl-toast-undo [data-od-list=\"messages\"] [data-od-slot=\"subject\"]",
+        "what": "the subject, as in “Revised quote for the spring catalogue”",
+        "slot": "text"
+      },
+      {
+        "name": "messages.archive",
+        "selector": ".odl-toast-undo [data-od-list=\"messages\"] [data-od-action=\"archive\"]",
+        "what": "the Archive action",
+        "slot": "action"
+      },
+      {
+        "name": "message",
+        "selector": ".odl-toast-undo [data-od-slot=\"message\"]",
+        "what": "one or two sentences: what it means and what to do next, as in “Archived”",
+        "slot": "text"
+      },
+      {
+        "name": "undo",
+        "selector": ".odl-toast-undo [data-od-action=\"undo\"]",
+        "what": "the Undo action",
+        "slot": "action"
+      },
+      {
+        "name": "close",
+        "selector": ".odl-toast-undo [data-od-action=\"close\"]",
+        "what": "the close action",
+        "slot": "action"
+      }
+    ],
+    "data": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "items": {
+            "type": "object",
+            "properties": {
+              "from": {
+                "type": "string",
+                "maxLength": 24,
+                "part": "messages.from"
+              },
+              "subject": {
+                "type": "string",
+                "maxLength": 56,
+                "part": "messages.subject"
+              }
+            },
+            "required": [
+              "from",
+              "subject"
+            ]
+          },
+          "part": "messages"
+        },
+        "message": {
+          "type": "string",
+          "maxLength": 24,
+          "part": "message"
+        }
+      },
+      "required": [
+        "messages",
+        "message"
+      ]
+    },
+    "edge": {
+      "empty": {
+        "status": "handled",
+        "evidence": "data-od-list",
+        "how": "the Smart UI renderer puts one plain 'Nothing to show yet.' line in an empty list"
+      },
+      "loading": {
+        "status": "handled",
+        "evidence": "data-od-slot",
+        "how": "the Smart UI renderer draws each marked slot as a quiet block of its size while the data arrives; the static file shows the filled part"
+      },
+      "error": {
+        "status": "not_built",
+        "how": "If the archive fails, put the row back and say so in the toast with Try again."
+      },
+      "disabled": {
+        "status": "not_built",
+        "how": "No control here is ever disabled; each one always does something."
+      },
+      "overflow": {
+        "status": "handled",
+        "how": "Long subjects and toast messages end in an ellipsis.",
+        "evidence": "text-overflow: ellipsis"
+      },
+      "long_text": {
+        "status": "handled",
+        "how": "Titles balance and body text wraps at word boundaries inside a capped measure.",
+        "evidence": "text-wrap"
+      },
+      "missing_image": {
+        "status": "none",
+        "how": "the part has no photo"
+      }
+    },
+    "keyboard": [
+      "Tab reaches each Archive button",
+      "After Archive, focus moves to Undo; after Undo, it returns to the restored row"
+    ]
+  }
+}

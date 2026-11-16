@@ -1,0 +1,128 @@
+{
+  "name": "All done empty state",
+  "summary": "Inbox zero: a calm note that everything is handled, when new items will show up, and a quiet way to see what's done.",
+  "use": "when a person has finished every item in a queue, inbox or to-do list",
+  "type": "states",
+  "style": "friendly",
+  "industries": [
+    "any"
+  ],
+  "tags": [
+    "inbox zero",
+    "all done",
+    "caught up",
+    "empty state",
+    "queue"
+  ],
+  "states": [
+    "all done",
+    "hover",
+    "focus"
+  ],
+  "source": null,
+  "a11y": "The heading says the state in words; the check drawing is decorative and hidden from screen readers.",
+  "width": "medium",
+  "live_region": "none",
+  "tokens_planned": {
+    "--ds-state-empty-gap": "--ds-space-stack-md",
+    "--ds-state-empty-measure": "--ds-layout-measure-lead",
+    "--ds-state-empty-media": "--ds-size-icon-lg"
+  },
+  "spec": {
+    "use_when": [
+      "a queue, inbox or review list has been cleared by the person"
+    ],
+    "avoid_when": [
+      "the list has never had items: use empty-first-use",
+      "items are hidden by a filter: use empty-filtered"
+    ],
+    "parts": [
+      {
+        "name": "title",
+        "selector": ".odl-empty-all-done [data-od-slot=\"title\"]",
+        "what": "the heading: what happened, in plain words, as in “You're all caught up”",
+        "slot": "text"
+      },
+      {
+        "name": "message",
+        "selector": ".odl-empty-all-done [data-od-slot=\"message\"]",
+        "what": "one or two sentences: what it means and what to do next, as in “You reviewed all 18 expense reports. New ones la”",
+        "slot": "text"
+      },
+      {
+        "name": "checked",
+        "selector": ".odl-empty-all-done [data-od-slot=\"checked\"]",
+        "what": "when the list was last checked, as in “Checked a minute ago”",
+        "slot": "text"
+      },
+      {
+        "name": "history",
+        "selector": ".odl-empty-all-done [data-od-action=\"history\"]",
+        "what": "the See what you approved action",
+        "slot": "action"
+      }
+    ],
+    "data": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "maxLength": 32,
+          "part": "title"
+        },
+        "message": {
+          "type": "string",
+          "maxLength": 128,
+          "part": "message"
+        },
+        "checked": {
+          "type": "string",
+          "maxLength": 32,
+          "part": "checked"
+        }
+      },
+      "required": [
+        "title",
+        "message",
+        "checked"
+      ]
+    },
+    "edge": {
+      "empty": {
+        "status": "shown",
+        "how": "This part is the empty state itself.",
+        "evidence": "class=\"odl-art\""
+      },
+      "loading": {
+        "status": "handled",
+        "evidence": "data-od-slot",
+        "how": "the Smart UI renderer draws each marked slot as a quiet block of its size while the data arrives; the static file shows the filled part"
+      },
+      "error": {
+        "status": "not_built",
+        "how": "Not applicable: an error isn't an empty list. Use page-banners or page-error."
+      },
+      "disabled": {
+        "status": "not_built",
+        "how": "No control here is ever disabled; each one always does something."
+      },
+      "overflow": {
+        "status": "handled",
+        "how": "Actions stack full width under 30rem; the panel caps its width.",
+        "evidence": "@container"
+      },
+      "long_text": {
+        "status": "handled",
+        "how": "Titles balance and body text wraps at word boundaries inside a capped measure.",
+        "evidence": "text-wrap"
+      },
+      "missing_image": {
+        "status": "none",
+        "how": "the part has no photo"
+      }
+    },
+    "keyboard": [
+      "Tab reaches See what you approved"
+    ]
+  }
+}

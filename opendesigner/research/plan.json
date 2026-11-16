@@ -1,0 +1,114 @@
+{
+  "v": 1,
+  "date": "2026-11-16",
+  "brief": "citizens and advocates inspecting German official notices and statutory deadlines",
+  "brief_confirmed": true,
+  "topics": {
+    "who": "Who they are: age range, region, languages, reading level, devices and network",
+    "context": "Where and how they use it: how often, how long, one hand or two, light, noise, interruptions",
+    "tasks": "The jobs they come to do, in their own words, and which ones matter most",
+    "apps": "The apps they already use every day, and the patterns those apps have taught them",
+    "expectations": "What they expect and what frustrates them: reviews, forums, complaints, published studies",
+    "preferences": "Preferences that touch design: text size, dark mode, density, colour meanings in their culture",
+    "accessibility": "Access needs common in the group: vision, motor, hearing, cognitive, situational",
+    "market": "The market: the analogous product, what people would use instead, what those products all do, and the gap",
+    "platform": "Platform conventions: what the platform's own guidelines and its best apps teach (navigation, controls, gestures)",
+    "voice": "Content and voice: the words the users use, their reading level, and how products in the category talk to them"
+  },
+  "queries": [
+    {
+      "topic": "who",
+      "query": "citizens and advocates inspecting German official notices and statutory deadlines demographics survey"
+    },
+    {
+      "topic": "who",
+      "query": "citizens and advocates inspecting German official notices and statutory deadlines devices smartphone usage statistics"
+    },
+    {
+      "topic": "context",
+      "query": "citizens and advocates inspecting German official notices and statutory deadlines day in the life workflow"
+    },
+    {
+      "topic": "context",
+      "query": "how citizens and advocates inspecting German official notices and statutory deadlines use Eine grafische Oberfläche für Citizen — die freie, lokale, evidenzgebundene Analyse-Engine für behördliche Schreiben in der eigenen Angelegenheit. at work OR at home"
+    },
+    {
+      "topic": "apps",
+      "query": "apps citizens and advocates inspecting German official notices and statutory deadlines use every day"
+    },
+    {
+      "topic": "apps",
+      "query": "most popular apps among citizens and advocates inspecting German official notices and statutory deadlines"
+    },
+    {
+      "topic": "expectations",
+      "query": "Eine grafische Oberfläche für Citizen — die freie, lokale, evidenzgebundene Analyse-Engine für behördliche Schreiben in der eigenen Angelegenheit. app reviews complaints"
+    },
+    {
+      "topic": "expectations",
+      "query": "citizens and advocates inspecting German official notices and statutory deadlines frustrations with software forum"
+    },
+    {
+      "topic": "preferences",
+      "query": "citizens and advocates inspecting German official notices and statutory deadlines preferences font size dark mode"
+    },
+    {
+      "topic": "preferences",
+      "query": "citizens and advocates inspecting German official notices and statutory deadlines design preferences study"
+    },
+    {
+      "topic": "accessibility",
+      "query": "citizens and advocates inspecting German official notices and statutory deadlines accessibility needs"
+    },
+    {
+      "topic": "accessibility",
+      "query": "citizens and advocates inspecting German official notices and statutory deadlines vision OR dexterity OR literacy statistics"
+    },
+    {
+      "topic": "market",
+      "query": "Eine grafische Oberfläche für Citizen — die freie, lokale, evidenzgebundene Analyse-Engine für behördliche Schreiben in der eigenen Angelegenheit. alternatives"
+    },
+    {
+      "topic": "market",
+      "query": "apps like Eine grafische Oberfläche für Citizen — die freie, lokale, evidenzgebundene Analyse-Engine für behördliche Schreiben in der eigenen Angelegenheit. for citizens and advocates inspecting German official notices and statutory deadlines"
+    },
+    {
+      "topic": "tasks",
+      "query": "citizens and advocates inspecting German official notices and statutory deadlines most common tasks Eine grafische Oberfläche für Citizen — die freie, lokale, evidenzgebundene Analyse-Engine für behördliche Schreiben in der eigenen Angelegenheit."
+    },
+    {
+      "topic": "tasks",
+      "query": "citizens and advocates inspecting German official notices and statutory deadlines jobs to be done workflow study"
+    },
+    {
+      "topic": "platform",
+      "query": "web design guidelines Eine grafische Oberfläche für Citizen — die freie, lokale, evidenzgebundene Analyse-Engine für behördliche Schreiben in der eigenen Angelegenheit."
+    },
+    {
+      "topic": "platform",
+      "query": "web navigation patterns Eine grafische Oberfläche für Citizen — die freie, lokale, evidenzgebundene Analyse-Engine für behördliche Schreiben in der eigenen Angelegenheit. apps"
+    },
+    {
+      "topic": "voice",
+      "query": "words citizens and advocates inspecting German official notices and statutory deadlines use for Eine grafische Oberfläche für Citizen — die freie, lokale, evidenzgebundene Analyse-Engine für behördliche Schreiben in der eigenen Angelegenheit."
+    },
+    {
+      "topic": "voice",
+      "query": "citizens and advocates inspecting German official notices and statutory deadlines reading level plain language"
+    }
+  ],
+  "tools": {
+    "have": [
+      "web-search"
+    ],
+    "missing": [
+      "browser",
+      "last30days",
+      "mobbin",
+      "deep-research",
+      "analytics"
+    ],
+    "reported": true
+  },
+  "file": "research/users.json"
+}

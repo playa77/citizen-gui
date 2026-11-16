@@ -1,0 +1,287 @@
+{
+  "name": "Share sheet",
+  "summary": "A share sheet shown open over a photo: recent people with their photos you can pick (picking one turns the bottom into a message and Send), apps as quiet round icon buttons, and a copy link row that confirms when the link is copied.",
+  "use": "in a social or media app, when someone taps Share on a post",
+  "type": "overlay",
+  "style": "friendly",
+  "industries": [
+    "social",
+    "media"
+  ],
+  "tags": [
+    "share",
+    "bottom sheet",
+    "contacts",
+    "copy link",
+    "apps"
+  ],
+  "states": [
+    "open",
+    "person selected",
+    "several selected",
+    "sent",
+    "link copied",
+    "hover",
+    "focus"
+  ],
+  "source": null,
+  "a11y": "The sheet is a labelled modal dialog; recent people are native checkboxes in a fieldset, the apps are named buttons, and \"Link copied\" and \"Sent\" are announced in a status region.",
+  "width": "narrow",
+  "photos": [
+    {
+      "img": "photo-1559310589-2673bfe16970",
+      "author": "Adam Vradenburg",
+      "page": "GA09PKfRIQY"
+    },
+    {
+      "img": "photo-1506794778202-cad84cf45f1d",
+      "author": "Albert Dera",
+      "page": "ILip77SbmOE"
+    },
+    {
+      "img": "photo-1531746020798-e6953c6e8e04",
+      "author": "Jimmy Fermin",
+      "page": "bqe0J0b26RQ"
+    },
+    {
+      "img": "photo-1596580817363-a4a8f67d4bc8",
+      "author": "Dorrell Tibbs",
+      "page": "gisFZKWpKQ4"
+    },
+    {
+      "img": "photo-1684598273404-2d94d7a7ce2f",
+      "author": "Hugo ROUQUETTE",
+      "page": "RhTXKh0UofQ"
+    },
+    {
+      "img": "photo-1607569708758-0270aa4651bd",
+      "author": "Meg Wagener",
+      "page": "M7fbJyBuAag"
+    },
+    {
+      "img": "photo-1600603406200-5b2a104684ac",
+      "author": "Vicky Hladynets",
+      "page": "_gDoyVv5F4c"
+    }
+  ],
+  "spec": {
+    "use_when": [
+      "sending a post, photo or listing straight to a few recent contacts with an optional message"
+    ],
+    "avoid_when": [
+      "inviting people to join a workspace with roles: use invite-members",
+      "a list of actions on an item, not sharing: use action-menu",
+      "a yes or no question in an overlay: use confirm-dialog"
+    ],
+    "parts": [
+      {
+        "name": "backdrop",
+        "selector": ".odl-art img",
+        "what": "the post behind the sheet, dimmed by a scrim; decorative",
+        "slot": "media"
+      },
+      {
+        "name": "title",
+        "selector": ".odl-share-sheet h3",
+        "what": "the sheet's heading",
+        "slot": "text"
+      },
+      {
+        "name": "close",
+        "selector": ".odl-close",
+        "what": "closes the sheet",
+        "slot": "action"
+      },
+      {
+        "name": "search",
+        "selector": ".odl-search input",
+        "what": "a search field for people",
+        "slot": "input"
+      },
+      {
+        "name": "people_label",
+        "selector": "legend.odl-label",
+        "what": "the heading over recent people",
+        "slot": "text"
+      },
+      {
+        "name": "people",
+        "selector": ".odl-people li",
+        "what": "one recent person: photo and first name, a checkbox to pick them",
+        "slot": "list"
+      },
+      {
+        "name": "apps_label",
+        "selector": "#odl-ss-apps",
+        "what": "the heading over the apps",
+        "slot": "text"
+      },
+      {
+        "name": "apps",
+        "selector": ".odl-apps li",
+        "what": "one place to share to: a round icon and a name",
+        "slot": "list"
+      },
+      {
+        "name": "copy",
+        "selector": ".odl-copy",
+        "what": "copy link row with the link shown under it",
+        "slot": "action"
+      },
+      {
+        "name": "message",
+        "selector": ".odl-send input",
+        "what": "a message field shown once someone is picked",
+        "slot": "input"
+      },
+      {
+        "name": "send",
+        "selector": ".odl-send-btn",
+        "what": "sends to the picked people",
+        "slot": "action"
+      },
+      {
+        "name": "status",
+        "selector": ".odl-toast",
+        "what": "a short status above the sheet: sent, copied or copy blocked",
+        "slot": "text"
+      }
+    ],
+    "data": {
+      "type": "object",
+      "required": [
+        "title",
+        "people",
+        "link"
+      ],
+      "properties": {
+        "backdrop": {
+          "type": "string",
+          "maxLength": 300,
+          "part": "backdrop"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 24,
+          "part": "title"
+        },
+        "search_placeholder": {
+          "type": "string",
+          "maxLength": 24,
+          "part": "search"
+        },
+        "people_label": {
+          "type": "string",
+          "maxLength": 20,
+          "part": "people_label"
+        },
+        "people": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 12,
+          "part": "people",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "name"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "maxLength": 40
+              },
+              "name": {
+                "type": "string",
+                "maxLength": 10
+              },
+              "photo": {
+                "type": "string",
+                "maxLength": 300
+              }
+            }
+          }
+        },
+        "apps_label": {
+          "type": "string",
+          "maxLength": 20,
+          "part": "apps_label"
+        },
+        "apps": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 5,
+          "part": "apps",
+          "items": {
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "maxLength": 8
+              },
+              "icon": {
+                "type": "string",
+                "maxLength": 40
+              }
+            }
+          }
+        },
+        "link": {
+          "type": "string",
+          "maxLength": 60,
+          "part": "copy"
+        },
+        "message_placeholder": {
+          "type": "string",
+          "maxLength": 28,
+          "part": "message"
+        }
+      }
+    },
+    "edge": {
+      "empty": {
+        "status": "handled",
+        "evidence": "data-od-list",
+        "how": "the Smart UI renderer puts one plain 'Nothing to show yet.' line in an empty list"
+      },
+      "loading": {
+        "status": "handled",
+        "evidence": "data-od-slot",
+        "how": "the Smart UI renderer draws each marked slot as a quiet block of its size while the data arrives; the static file shows the filled part"
+      },
+      "error": {
+        "status": "handled",
+        "how": "if the browser blocks copying, the status line says to select the link and copy it by hand",
+        "evidence": "Copying is blocked here: select the link and copy it"
+      },
+      "disabled": {
+        "status": "not_built",
+        "how": "disable Send while sending and an app button when that app is not set up"
+      },
+      "overflow": {
+        "status": "handled",
+        "how": "the recent people row scrolls sideways in its own box, sized so a half person shows there is more",
+        "evidence": "overflow-x: auto; scrollbar-width: none; overscroll-behavior-x: contain"
+      },
+      "long_text": {
+        "status": "handled",
+        "how": "person and app names are cut with an ellipsis; the link wraps at any character",
+        "evidence": "overflow-wrap: anywhere"
+      },
+      "missing_image": {
+        "status": "handled",
+        "evidence": "data-od-media",
+        "how": "the Smart UI renderer swaps a photo that fails to load for a block of the same size with its alt text"
+      }
+    },
+    "keyboard": [
+      "Tab reaches Close, Search, each recent person, each app, Copy link, then the message field and Send once someone is picked",
+      "Space on a person picks or unpicks them; picking anyone replaces the apps with a message field and Send",
+      "Enter in the message field or on Send sends to the picked people and announces it",
+      "Enter or Space on Copy link copies it and announces 'Link copied'"
+    ]
+  }
+}

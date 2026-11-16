@@ -1,0 +1,71 @@
+/* <od-surface> states: loading, missing, stale, no permission, empty, approval. Tokens only (--ds-*), like the
+   library components. Load after tokens.css. MIT. */
+.od-surface { display: block; align-self: start; container-type: inline-size; color: var(--ds-color-text-primary); font: var(--ds-text-body-md); }
+/* a part keeps its natural height in a taller grid row: a text card never stretches (align-self above). A photo may fill
+   only beside words in the part's own columns; alone in one column it keeps its own shape and is at least 160 px tall. */
+/* an answer's words can be longer than the sample's: break a long word rather than push the page sideways */
+.od-surface [data-od-slot] { overflow-wrap: anywhere; }
+/* a button label written by the model may be longer than the sample: let it wrap inside the button, never past the edge */
+.od-surface [data-od-action] { max-inline-size: 100%; }
+.od-surface [data-od-action] [data-od-slot="label"], .od-surface [data-od-action]:not(:has(*)) { white-space: normal; text-align: center; }
+.od-surface .od-column { display: grid; gap: var(--ds-space-stack-md); }
+.od-surface .od-column[data-gap="sm"] { gap: var(--ds-space-stack-sm); }
+.od-surface .od-column[data-gap="lg"] { gap: var(--ds-space-stack-lg); }
+
+/* Loading: each slot still waiting becomes a quiet block the size of a short line, so the layout does not jump. */
+.od-surface [data-od-pending] { display: inline-block; min-inline-size: 6ch; min-block-size: 1lh; vertical-align: middle; color: transparent;
+  background: var(--ds-color-bg-neutral-subtle); border-radius: var(--ds-radius-detail);
+  animation: od-pulse var(--ds-motion-duration-extra) var(--ds-motion-easing-standard) infinite alternate; }
+.od-surface img[data-od-pending], .od-surface .od-missing-image[data-od-pending] { display: block; }
+/* a separator drawn before or after a waiting slot waits too */
+.od-surface [data-od-pending]::before, .od-surface [data-od-pending]::after, .od-surface [data-od-pending] + *::before { content: none; }
+@keyframes od-pulse { to { background: var(--ds-color-bg-neutral-subtle-hover); } }
+
+/* A value the answer did not have shows as missing, never as an invented number (R6). */
+.od-surface [data-od-missing]:empty::before { content: "–"; color: var(--ds-color-text-tertiary); }
+/* Pictures. The box has the picture's shape from the first frame (the part's own CSS shape wins; :where keeps this rule
+   weaker than any part's), a quiet token block while it loads, a short fade when it arrives. */
+:where(.od-surface img[data-od-img]) { aspect-ratio: var(--od-img-ratio, auto); }
+.od-surface img[data-od-img="loading"] { color: transparent; background-color: var(--ds-color-bg-neutral-subtle);
+  animation: od-pulse var(--ds-motion-duration-extra) var(--ds-motion-easing-standard) infinite alternate; }
+.od-surface img[data-od-img="ready"] { animation: od-fade-in var(--ds-motion-duration-short) var(--ds-motion-easing-standard) both; }
+@keyframes od-fade-in { from { opacity: 0; } }
+/* A picture that fails: a calm tile of the same shape with an icon and the alt text, never a broken-image glyph. */
+.od-surface .od-missing-image { display: grid; place-content: center; justify-items: center; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-stack-xs);
+  box-sizing: border-box; inline-size: 100%; block-size: 100%; aspect-ratio: var(--od-img-ratio, auto); min-block-size: var(--ds-size-control-lg);
+  padding: var(--ds-space-inset-md); overflow: hidden; color: var(--ds-color-text-secondary); font: var(--ds-text-label-md); text-align: center;
+  background: var(--ds-color-bg-neutral-subtle); }
+.od-surface .od-missing-image svg { inline-size: var(--ds-size-icon-md); block-size: var(--ds-size-icon-md); stroke-width: var(--ds-icon-stroke-md); color: var(--ds-color-text-tertiary); }
+.od-surface .od-missing-image span { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; box-sizing: border-box; inline-size: 100%; max-inline-size: 28ch; overflow-wrap: anywhere; }
+
+.od-surface .od-notice { display: flex; gap: var(--ds-space-inline-xs); margin: 0 0 var(--ds-space-stack-sm); color: var(--ds-color-text-secondary); font: var(--ds-text-label-md); }
+.od-surface .od-notice[data-kind="lock"] { margin: 0; padding: var(--ds-space-inset-lg); border: var(--ds-border-width-default) solid var(--ds-color-border-subtle);
+  border-radius: var(--ds-radius-container); background: var(--ds-color-surface-raised); }
+.od-surface .od-stale > :not(.od-notice) { opacity: 0.92; }
+.od-surface .od-empty { color: var(--ds-color-text-secondary); font: var(--ds-text-body-md); list-style: none; }
+.od-surface .od-empty td { padding: var(--ds-space-inset-lg); text-align: center; }
+
+.od-surface .od-approval { margin-block-start: var(--ds-space-stack-md); }
+.od-surface [data-od-state="pending"] { cursor: progress; }
+.od-surface [data-od-state="done"] { cursor: default; }
+
+.od-live { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+@media (prefers-reduced-motion: reduce) {
+  .od-surface [data-od-pending], .od-surface img[data-od-img] { animation: none; }
+}
+
+/* od-chat: the tool call that picked the part, and the toast after a change. Tokens only. */
+.od-chat-call { margin: 0; color: var(--ds-color-text-secondary); font: var(--ds-text-label-sm, var(--ds-text-label-md)); font-family: var(--ds-font-family-mono, monospace); }
+.od-chat-call::before { content: ""; display: inline-block; inline-size: 0.5em; block-size: 0.5em; margin-inline-end: var(--ds-space-inline-xs);
+  border-radius: 50%; background: var(--ds-color-bg-action-primary); vertical-align: middle; }
+.od-chat-call.is-done::before { background: var(--ds-color-text-tertiary, var(--ds-color-text-secondary)); }
+.od-toasts { position: fixed; inset-block-end: var(--ds-space-inset-lg); inset-inline: var(--ds-space-inset-md); z-index: 50; display: grid; justify-items: center; gap: var(--ds-space-stack-sm); pointer-events: none; }
+.od-toast { display: flex; align-items: center; gap: var(--ds-space-inline-md); max-inline-size: 32rem; padding: var(--ds-space-inset-sm) var(--ds-space-inset-md);
+  border-radius: var(--ds-radius-control); background: var(--ds-color-surface-inverse, var(--ds-color-text-primary)); color: var(--ds-color-text-inverse, var(--ds-color-surface-raised));
+  box-shadow: var(--ds-elevation-overlay, var(--ds-elevation-raised)); font: var(--ds-text-body-sm, var(--ds-text-body-md)); pointer-events: auto; }
+.od-toast[data-tone="danger"] { background: var(--ds-color-bg-danger-strong, var(--ds-color-text-danger, var(--ds-color-text-primary))); }
+.od-toast-undo { min-block-size: var(--ds-size-target-min); padding-inline: var(--ds-space-inset-sm); border: 0; border-radius: var(--ds-radius-control-sm, var(--ds-radius-control));
+  background: transparent; color: inherit; font: inherit; font-weight: var(--ds-font-weight-label); text-decoration: underline; cursor: pointer; }
+.od-toast-undo:focus-visible { outline: var(--ds-focus-ring-width) solid var(--ds-color-border-focus); outline-offset: var(--ds-focus-ring-offset); }
+

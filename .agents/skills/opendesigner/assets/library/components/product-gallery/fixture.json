@@ -1,0 +1,88 @@
+{
+ "photos": [
+  {
+   "photo": {
+    "src": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=800&h=1000&fit=crop&auto=format&q=70",
+    "alt": "Camel wool coat with a tie belt, worn against a stone wall",
+    "width": 800,
+    "height": 1000
+   },
+   "label": "front"
+  },
+  {
+   "photo": {
+    "src": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=800&h=1000&fit=crop&crop=focalpoint&fp-x=0.55&fp-y=0.45&fp-z=2.2&auto=format&q=70",
+    "alt": "Close view of the tie belt and the wool's texture",
+    "width": 800,
+    "height": 1000
+   },
+   "label": "belt"
+  },
+  {
+   "photo": {
+    "src": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=800&h=1000&fit=crop&crop=focalpoint&fp-x=0.5&fp-y=0.15&fp-z=2.6&auto=format&q=70",
+    "alt": "Close view of the notched lapels",
+    "width": 800,
+    "height": 1000
+   },
+   "label": "lapels"
+  }
+ ],
+ "eyebrow": "Northfold · Coats",
+ "name": "Camel belted wool coat",
+ "price": 189,
+ "was_price": 229,
+ "currency": "GBP",
+ "sale_label": "Sale · Save £40",
+ "rating_average": "4.6",
+ "rating_count": "52",
+ "colours": [
+  {
+   "name": "Sand",
+   "swatch": "sand"
+  },
+  {
+   "name": "Ink",
+   "swatch": "ink"
+  }
+ ],
+ "sizes": [
+  {
+   "label": "S",
+   "sold_out": "false"
+  },
+  {
+   "label": "M",
+   "sold_out": "false"
+  },
+  {
+   "label": "L",
+   "sold_out": "true"
+  }
+ ],
+ "size_note": "Falls below the knee",
+ "stock": "Only 2 left in M",
+ "add": {
+  "label": "Add to basket",
+  "event": {
+   "name": "add_to_basket"
+  }
+ },
+ "perks": [
+  {
+   "title": "Free delivery",
+   "detail": "by Tuesday, 17 Nov",
+   "icon": "truck"
+  },
+  {
+   "title": "Free returns",
+   "detail": "for 60 days",
+   "icon": "undo"
+  },
+  {
+   "title": "Two-year warranty",
+   "icon": "shield"
+  }
+ ],
+ "tone": "warning"
+}

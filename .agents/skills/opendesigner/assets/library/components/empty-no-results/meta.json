@@ -1,0 +1,135 @@
+{
+  "name": "No results",
+  "summary": "An empty search that repeats what was searched and where, then offers the ways to widen it: a spelling fix, a wider scope and a cleared date.",
+  "use": "when a search or lookup returns nothing",
+  "type": "states",
+  "style": "quiet",
+  "industries": [
+    "any"
+  ],
+  "tags": [
+    "no results",
+    "search",
+    "zero results",
+    "did you mean",
+    "empty state"
+  ],
+  "states": [
+    "no results",
+    "hover",
+    "focus"
+  ],
+  "source": null,
+  "a11y": "A polite status repeats the outcome, so it is read when a search runs; each way to widen the search is a real button for your app to wire.",
+  "width": "medium",
+  "live_region": "polite",
+  "notes": "The three ways to widen the search are actions for your app to wire; write them from the search that ran (a spelling fix, a wider folder, any date).",
+  "tokens_planned": {
+    "--ds-state-empty-gap": "--ds-space-stack-md",
+    "--ds-state-empty-measure": "--ds-layout-measure-lead",
+    "--ds-state-empty-media": "--ds-size-icon-lg"
+  },
+  "spec": {
+    "use_when": [
+      "a search, lookup or query returns zero items"
+    ],
+    "avoid_when": [
+      "the list is empty because nothing exists yet: use empty-first-use",
+      "only filters removed the items: use empty-filtered"
+    ],
+    "parts": [
+      {
+        "name": "query",
+        "selector": ".odl-empty-no-results [data-od-slot=\"query\"]",
+        "what": "what the person searched for, as in “quartely report”",
+        "slot": "text"
+      },
+      {
+        "name": "message",
+        "selector": ".odl-empty-no-results [data-od-slot=\"message\"]",
+        "what": "one or two sentences: what it means and what to do next, as in “We searched file names and contents in Finance, ”",
+        "slot": "text"
+      },
+      {
+        "name": "spelling",
+        "selector": ".odl-empty-no-results [data-od-action=\"spelling\"]",
+        "what": "the Search for “quarterly report” instead action",
+        "slot": "action"
+      },
+      {
+        "name": "label",
+        "selector": ".odl-empty-no-results [data-od-slot=\"label\"]",
+        "what": "the visible label, as in “Search for “quarterly report” instead”",
+        "slot": "text"
+      },
+      {
+        "name": "all_folders",
+        "selector": ".odl-empty-no-results [data-od-action=\"all_folders\"]",
+        "what": "the Search all folders, not only Finance action",
+        "slot": "action"
+      },
+      {
+        "name": "any_date",
+        "selector": ".odl-empty-no-results [data-od-action=\"any_date\"]",
+        "what": "the Search any date action",
+        "slot": "action"
+      }
+    ],
+    "data": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "maxLength": 24,
+          "part": "query"
+        },
+        "message": {
+          "type": "string",
+          "maxLength": 104,
+          "part": "message"
+        }
+      },
+      "required": [
+        "query",
+        "message"
+      ]
+    },
+    "edge": {
+      "empty": {
+        "status": "shown",
+        "how": "This part is the empty state itself.",
+        "evidence": "class=\"odl-art\""
+      },
+      "loading": {
+        "status": "handled",
+        "evidence": "data-od-slot",
+        "how": "the Smart UI renderer draws each marked slot as a quiet block of its size while the data arrives; the static file shows the filled part"
+      },
+      "error": {
+        "status": "not_built",
+        "how": "Not applicable: an error isn't an empty list. Use page-banners or page-error."
+      },
+      "disabled": {
+        "status": "not_built",
+        "how": "No control here is ever disabled; each one always does something."
+      },
+      "overflow": {
+        "status": "handled",
+        "how": "Actions stack full width under 30rem; the panel caps its width.",
+        "evidence": "@container"
+      },
+      "long_text": {
+        "status": "handled",
+        "how": "Titles balance and body text wraps at word boundaries inside a capped measure.",
+        "evidence": "text-wrap"
+      },
+      "missing_image": {
+        "status": "none",
+        "how": "the part has no photo"
+      }
+    },
+    "keyboard": [
+      "Tab moves through the three ways to widen the search; Enter or Space picks one"
+    ]
+  }
+}

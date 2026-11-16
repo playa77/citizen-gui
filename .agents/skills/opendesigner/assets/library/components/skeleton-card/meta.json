@@ -1,0 +1,189 @@
+{
+  "name": "Card skeleton",
+  "summary": "A grid of cards that holds each photo, title, detail and price in place while it loads, so the grid never jumps when they arrive.",
+  "use": "for a grid of cards with photos (stays, products, posts) that loads after the page",
+  "type": "states",
+  "style": "quiet",
+  "industries": [
+    "any"
+  ],
+  "tags": [
+    "skeleton",
+    "loading",
+    "cards",
+    "grid",
+    "no layout shift"
+  ],
+  "states": [
+    "loading",
+    "loaded",
+    "reduced motion"
+  ],
+  "source": null,
+  "a11y": "While loading, the content area is aria-busy and inert, so nobody can tab into placeholders; a polite status says when loading starts and when it is done. Under reduced motion the bones stay still.",
+  "width": "wide",
+  "live_region": "polite",
+  "notes": "Delete the button marked data-odl-demo; set aria-busy on .odl-body from your own request.",
+  "photos": [
+    {
+      "img": "photo-1618773928121-c32242e63f39",
+      "author": "Vojtech Bruzek",
+      "page": "Yrxr3bsPdS0"
+    },
+    {
+      "img": "photo-1611892440504-42a792e24d32",
+      "author": "visualsofdana",
+      "page": "T5pL6ciEn-I"
+    },
+    {
+      "img": "photo-1566665797739-1674de7a421a",
+      "author": "mark champs",
+      "page": "Id2IIl1jOB0"
+    }
+  ],
+  "tokens_planned": {
+    "--ds-state-skeleton-base": "--ds-color-bg-neutral-subtle",
+    "--ds-state-skeleton-highlight": "--ds-color-surface-raised",
+    "--ds-state-skeleton-pulse": "1500ms (0ms when motion is reduced)",
+    "--ds-state-skeleton-radius": "--ds-radius-detail"
+  },
+  "spec": {
+    "use_when": [
+      "a grid of cards loads after the page frame and the count is known or capped"
+    ],
+    "avoid_when": [
+      "one card or a short wait: show nothing or a spinner",
+      "an unknown number of items: show one row of bones, not a full page"
+    ],
+    "parts": [
+      {
+        "name": "items",
+        "selector": ".odl-skeleton-card [data-od-list=\"items\"]",
+        "what": "the items, one item each",
+        "slot": "list"
+      },
+      {
+        "name": "items.photo",
+        "selector": ".odl-skeleton-card [data-od-list=\"items\"] [data-od-media=\"photo\"]",
+        "what": "the picture",
+        "slot": "media"
+      },
+      {
+        "name": "items.name",
+        "selector": ".odl-skeleton-card [data-od-list=\"items\"] [data-od-slot=\"name\"]",
+        "what": "the name, as in “Linen room, Old Town”",
+        "slot": "text"
+      },
+      {
+        "name": "items.detail",
+        "selector": ".odl-skeleton-card [data-od-list=\"items\"] [data-od-slot=\"detail\"]",
+        "what": "a short line of detail under the title, as in “2 guests · 1 bed”",
+        "slot": "text"
+      },
+      {
+        "name": "items.price",
+        "selector": ".odl-skeleton-card [data-od-list=\"items\"] [data-od-slot=\"price\"]",
+        "what": "the price, as in “$148 night”",
+        "slot": "text"
+      }
+    ],
+    "data": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "items": {
+            "type": "object",
+            "properties": {
+              "photo": {
+                "type": "object",
+                "required": [
+                  "src",
+                  "alt"
+                ],
+                "properties": {
+                  "src": {
+                    "type": "string",
+                    "format": "uri",
+                    "maxLength": 2048
+                  },
+                  "alt": {
+                    "type": "string",
+                    "maxLength": 120
+                  }
+                },
+                "part": "items.photo"
+              },
+              "name": {
+                "type": "string",
+                "maxLength": 32,
+                "part": "items.name"
+              },
+              "detail": {
+                "type": "string",
+                "maxLength": 24,
+                "part": "items.detail"
+              },
+              "price": {
+                "type": "string",
+                "maxLength": 24,
+                "part": "items.price"
+              }
+            },
+            "required": [
+              "photo",
+              "name",
+              "detail",
+              "price"
+            ]
+          },
+          "part": "items"
+        }
+      },
+      "required": [
+        "items"
+      ]
+    },
+    "edge": {
+      "empty": {
+        "status": "handled",
+        "evidence": "data-od-list",
+        "how": "the Smart UI renderer puts one plain 'Nothing to show yet.' line in an empty list"
+      },
+      "loading": {
+        "status": "shown",
+        "how": "aria-busy turns each text run, picture and control into a bone of its own size; nothing moves when data arrives.",
+        "evidence": "aria-busy=\"true\""
+      },
+      "error": {
+        "status": "not_built",
+        "how": "When the request fails, keep the frame and show an error banner with a retry (page-banners) in place of the rows."
+      },
+      "disabled": {
+        "status": "shown",
+        "how": "While loading, the content is inert, so placeholders can't be focused or clicked.",
+        "evidence": "inert"
+      },
+      "overflow": {
+        "status": "handled",
+        "how": "Cards fill as many columns as fit, at least 13rem each; names end in an ellipsis.",
+        "evidence": "auto-fit"
+      },
+      "long_text": {
+        "status": "handled",
+        "how": "Each line is clamped to one line with an ellipsis, so the skeleton and the loaded layout keep one height.",
+        "evidence": "text-overflow: ellipsis"
+      },
+      "missing_image": {
+        "status": "handled",
+        "evidence": "data-od-media",
+        "how": "the Smart UI renderer swaps a photo that fails to load for a block of the same size with its alt text"
+      }
+    },
+    "keyboard": [
+      "Tab reaches Show loaded (the demo toggle), then the loaded content once it's ready; nothing inside is focusable while loading"
+    ]
+  }
+}

@@ -1,0 +1,243 @@
+{
+  "name": "Story rail",
+  "summary": "A row of story rings with people's photos that scrolls sideways inside its box: your own add ring first, unseen stories in an accent ring, close friends marked with a star, a live badge, and seen ones in grey.",
+  "use": "at the top of a social or media feed, for the stories people have posted today",
+  "type": "content",
+  "style": "friendly",
+  "industries": [
+    "social",
+    "media"
+  ],
+  "tags": [
+    "stories",
+    "avatars",
+    "carousel",
+    "feed",
+    "rings"
+  ],
+  "states": [
+    "unseen",
+    "seen",
+    "close friends",
+    "live",
+    "add",
+    "hover",
+    "focus",
+    "scrolled to end"
+  ],
+  "source": null,
+  "a11y": "Each story is a button whose name says who posted it and whether it is new, live or seen; opening one marks it seen, and on wider screens two arrow buttons scroll the rail.",
+  "width": "medium",
+  "photos": [
+    {
+      "img": "photo-1531746020798-e6953c6e8e04",
+      "author": "Jimmy Fermin",
+      "page": "bqe0J0b26RQ"
+    },
+    {
+      "img": "photo-1506794778202-cad84cf45f1d",
+      "author": "Albert Dera",
+      "page": "ILip77SbmOE"
+    },
+    {
+      "img": "photo-1611403119860-57c4937ef987",
+      "author": "Hà Nguyễn",
+      "page": "OFSQ6bHjFjs"
+    },
+    {
+      "img": "photo-1607569708758-0270aa4651bd",
+      "author": "Meg Wagener",
+      "page": "M7fbJyBuAag"
+    },
+    {
+      "img": "photo-1705645930353-0e335311ef20",
+      "author": "Danny Postma",
+      "page": "zNxOw2JFNKs"
+    },
+    {
+      "img": "photo-1684598273404-2d94d7a7ce2f",
+      "author": "Hugo ROUQUETTE",
+      "page": "RhTXKh0UofQ"
+    },
+    {
+      "img": "photo-1596580817363-a4a8f67d4bc8",
+      "author": "Dorrell Tibbs",
+      "page": "gisFZKWpKQ4"
+    },
+    {
+      "img": "photo-1534751516642-a1af1ef26a56",
+      "author": "Mathias Huysmans",
+      "page": "U4JDjYmjn1g"
+    },
+    {
+      "img": "photo-1600603406200-5b2a104684ac",
+      "author": "Vicky Hladynets",
+      "page": "_gDoyVv5F4c"
+    }
+  ],
+  "spec": {
+    "use_when": [
+      "a row of people or channels with something new, where opening one clears its ring"
+    ],
+    "avoid_when": [
+      "suggesting people to follow: use follow-suggestions",
+      "a row of shows, albums or products: use media-shelf",
+      "a full list of members with roles: use member-list"
+    ],
+    "parts": [
+      {
+        "name": "title",
+        "selector": ".odl-story-rail h3",
+        "what": "the rail's heading",
+        "slot": "text"
+      },
+      {
+        "name": "new_count",
+        "selector": ".odl-new",
+        "what": "how many stories are unseen, or All seen",
+        "slot": "text"
+      },
+      {
+        "name": "arrows",
+        "selector": ".odl-arrow",
+        "what": "scroll back and forward; hidden on phones",
+        "slot": "action"
+      },
+      {
+        "name": "stories",
+        "selector": ".odl-rail li",
+        "what": "one story ring with a photo and a name; the first is your own add ring",
+        "slot": "list"
+      },
+      {
+        "name": "photo",
+        "selector": ".odl-av",
+        "what": "the poster's photo inside its ring",
+        "slot": "media"
+      },
+      {
+        "name": "badge",
+        "selector": ".odl-plus",
+        "what": "a plus on your own ring or a star for close friends",
+        "slot": "none"
+      },
+      {
+        "name": "live",
+        "selector": ".odl-live",
+        "what": "a LIVE tag under the ring",
+        "slot": "text"
+      },
+      {
+        "name": "name",
+        "selector": ".odl-name",
+        "what": "the poster's short name",
+        "slot": "text"
+      }
+    ],
+    "data": {
+      "type": "object",
+      "required": [
+        "stories"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "maxLength": 20,
+          "part": "title"
+        },
+        "own": {
+          "type": "object",
+          "properties": {
+            "photo": {
+              "type": "string",
+              "maxLength": 300
+            },
+            "label": {
+              "type": "string",
+              "maxLength": 12
+            }
+          },
+          "part": "stories"
+        },
+        "stories": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 30,
+          "part": "stories",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "full_name",
+              "photo",
+              "state"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "maxLength": 14
+              },
+              "full_name": {
+                "type": "string",
+                "maxLength": 40
+              },
+              "photo": {
+                "type": "string",
+                "maxLength": 300
+              },
+              "state": {
+                "enum": [
+                  "new",
+                  "seen",
+                  "live",
+                  "close"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "edge": {
+      "empty": {
+        "status": "handled",
+        "evidence": "data-od-list",
+        "how": "the Smart UI renderer puts one plain 'Nothing to show yet.' line in an empty list"
+      },
+      "loading": {
+        "status": "handled",
+        "evidence": "data-od-slot",
+        "how": "the Smart UI renderer draws each marked slot as a quiet block of its size while the data arrives; the static file shows the filled part"
+      },
+      "error": {
+        "status": "not_built",
+        "how": "if stories fail to load, keep your own ring and put a short retry line beside it"
+      },
+      "disabled": {
+        "status": "shown",
+        "how": "the back arrow is disabled at the start and the forward arrow at the end of the rail",
+        "evidence": ".odl-arrow:disabled"
+      },
+      "overflow": {
+        "status": "handled",
+        "how": "the rail scrolls sideways in its own box with snap points, fading at the end until you reach it",
+        "evidence": "overflow-x: auto; overscroll-behavior-x: contain"
+      },
+      "long_text": {
+        "status": "handled",
+        "how": "a name wider than its ring is cut off with an ellipsis",
+        "evidence": ".odl-name { max-inline-size: 100%; overflow: hidden; text-overflow: ellipsis"
+      },
+      "missing_image": {
+        "status": "handled",
+        "evidence": "data-od-media",
+        "how": "the Smart UI renderer swaps a photo that fails to load for a block of the same size with its alt text"
+      }
+    },
+    "keyboard": [
+      "Tab moves through the back and forward arrows, then each story in order",
+      "Enter or Space on an arrow scrolls the rail by most of its width",
+      "Enter or Space on a story opens it and marks it seen; on your own ring it is the add action"
+    ]
+  }
+}

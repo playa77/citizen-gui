@@ -1,0 +1,176 @@
+{
+  "name": "Table skeleton",
+  "summary": "A table that keeps its header, column widths and row height while rows load, so numbers and status pills land where the bones were.",
+  "use": "for a data table that loads, sorts or pages after the page frame",
+  "type": "states",
+  "style": "dense",
+  "industries": [
+    "finance",
+    "saas",
+    "crm",
+    "logistics",
+    "any"
+  ],
+  "tags": [
+    "skeleton",
+    "loading",
+    "table",
+    "data",
+    "no layout shift"
+  ],
+  "states": [
+    "loading",
+    "loaded",
+    "reduced motion"
+  ],
+  "source": null,
+  "a11y": "While loading, the content area is aria-busy and inert, so nobody can tab into placeholders; a polite status says when loading starts and when it is done. Under reduced motion the bones stay still.",
+  "width": "wide",
+  "live_region": "polite",
+  "notes": "Delete the button marked data-odl-demo; set aria-busy on .odl-body from your own request.",
+  "tokens_planned": {
+    "--ds-state-skeleton-base": "--ds-color-bg-neutral-subtle",
+    "--ds-state-skeleton-highlight": "--ds-color-surface-raised",
+    "--ds-state-skeleton-pulse": "1500ms (0ms when motion is reduced)",
+    "--ds-state-skeleton-radius": "--ds-radius-detail"
+  },
+  "spec": {
+    "use_when": [
+      "table rows load, re-sort or page from the server"
+    ],
+    "avoid_when": [
+      "a re-sort that finishes in under about 300 ms: keep the old rows until the new ones arrive",
+      "the header itself is unknown: show a text skeleton"
+    ],
+    "parts": [
+      {
+        "name": "rows",
+        "selector": ".odl-skeleton-table [data-od-list=\"rows\"]",
+        "what": "the rows, one item each",
+        "slot": "list"
+      },
+      {
+        "name": "rows.number",
+        "selector": ".odl-skeleton-table [data-od-list=\"rows\"] [data-od-slot=\"number\"]",
+        "what": "the number, as in “INV-2041”",
+        "slot": "text"
+      },
+      {
+        "name": "rows.customer",
+        "selector": ".odl-skeleton-table [data-od-list=\"rows\"] [data-od-slot=\"customer\"]",
+        "what": "the customer, as in “Gorsedown Print”",
+        "slot": "text"
+      },
+      {
+        "name": "rows.date",
+        "selector": ".odl-skeleton-table [data-od-list=\"rows\"] [data-od-slot=\"date\"]",
+        "what": "the date, as in “Nov 12”",
+        "slot": "text"
+      },
+      {
+        "name": "rows.amount",
+        "selector": ".odl-skeleton-table [data-od-list=\"rows\"] [data-od-slot=\"amount\"]",
+        "what": "the amount, as in “$4,280.00”",
+        "slot": "text"
+      },
+      {
+        "name": "rows.status",
+        "selector": ".odl-skeleton-table [data-od-list=\"rows\"] [data-od-var=\"status\"]",
+        "what": "paid, due or overdue",
+        "slot": "text"
+      }
+    ],
+    "data": {
+      "type": "object",
+      "properties": {
+        "rows": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "type": "object",
+            "properties": {
+              "number": {
+                "type": "string",
+                "maxLength": 24,
+                "part": "rows.number"
+              },
+              "customer": {
+                "type": "string",
+                "maxLength": 24,
+                "part": "rows.customer"
+              },
+              "date": {
+                "type": "string",
+                "maxLength": 24,
+                "part": "rows.date"
+              },
+              "amount": {
+                "type": "string",
+                "maxLength": 24,
+                "part": "rows.amount"
+              },
+              "status": {
+                "enum": [
+                  "danger",
+                  "success",
+                  "warning"
+                ],
+                "part": "rows.status"
+              }
+            },
+            "required": [
+              "number",
+              "customer",
+              "date",
+              "amount",
+              "status"
+            ]
+          },
+          "part": "rows"
+        }
+      },
+      "required": [
+        "rows"
+      ]
+    },
+    "edge": {
+      "empty": {
+        "status": "handled",
+        "evidence": "data-od-list",
+        "how": "the Smart UI renderer puts one plain 'Nothing to show yet.' line in an empty list"
+      },
+      "loading": {
+        "status": "shown",
+        "how": "aria-busy turns each text run, picture and control into a bone of its own size; nothing moves when data arrives.",
+        "evidence": "aria-busy=\"true\""
+      },
+      "error": {
+        "status": "not_built",
+        "how": "When the request fails, keep the frame and show an error banner with a retry (page-banners) in place of the rows."
+      },
+      "disabled": {
+        "status": "shown",
+        "how": "While loading, the content is inert, so placeholders can't be focused or clicked.",
+        "evidence": "inert"
+      },
+      "overflow": {
+        "status": "handled",
+        "how": "Under 36rem each row stacks into two lines (customer and amount, then invoice number and status) and the date hides; nothing scrolls sideways.",
+        "evidence": "@container (max-width: 36rem)"
+      },
+      "long_text": {
+        "status": "handled",
+        "how": "Each line is clamped to one line with an ellipsis, so the skeleton and the loaded layout keep one height.",
+        "evidence": "text-overflow: ellipsis"
+      },
+      "missing_image": {
+        "status": "none",
+        "how": "the part has no photo"
+      }
+    },
+    "keyboard": [
+      "Tab reaches Show loaded (the demo toggle), then the loaded content once it's ready; nothing inside is focusable while loading"
+    ]
+  }
+}

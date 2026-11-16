@@ -1,0 +1,346 @@
+{
+  "name": "Leaderboard",
+  "summary": "A game or challenge leaderboard: a calm podium of the top three with photos and a crown for first, ranked rows with photos and how far each moved up or down, your own row pinned and highlighted, and a this week or all time switch.",
+  "use": "in a game, fitness challenge or learning streak, for showing who leads and where you stand",
+  "type": "data",
+  "style": "friendly",
+  "industries": [
+    "games",
+    "fitness",
+    "education"
+  ],
+  "tags": [
+    "leaderboard",
+    "ranking",
+    "podium",
+    "scores",
+    "challenge"
+  ],
+  "states": [
+    "this week",
+    "all time",
+    "moved up",
+    "moved down",
+    "no change",
+    "you",
+    "focus"
+  ],
+  "source": null,
+  "a11y": "Ordered lists in rank order (the podium is reordered only visually); each rank change is said in words, your row has aria-current, and the period switch is a native radio group.",
+  "width": "medium",
+  "photos": [
+    {
+      "img": "photo-1566616213894-2d4e1baee5d8",
+      "author": "Ravi Patel",
+      "page": "VMGAbeeJTKo"
+    },
+    {
+      "img": "photo-1565884280295-98eb83e41c65",
+      "author": "Dorrell Tibbs",
+      "page": "GntSiIMHyVM"
+    },
+    {
+      "img": "photo-1632765854612-9b02b6ec2b15",
+      "author": "Good Faces",
+      "page": "xmSWVeGEnJw"
+    },
+    {
+      "img": "photo-1544168190-79c17527004f",
+      "author": "Juan Encalada",
+      "page": "WC7KIHo13Fc"
+    },
+    {
+      "img": "photo-1607503873903-c5e95f80d7b9",
+      "author": "Jassir Jonis",
+      "page": "hSKBleRfj5A"
+    },
+    {
+      "img": "photo-1605988941502-372407d1dac5",
+      "author": "Dhruv Kadam",
+      "page": "-cFEBbptadk"
+    },
+    {
+      "img": "photo-1770096951056-c94a812e9fd4",
+      "author": "Babak Eshaghian",
+      "page": "o5xiwSPLd8o"
+    },
+    {
+      "img": "photo-1637325262485-5cf1abb98c05",
+      "author": "Teslariu Mihai",
+      "page": "UWUlKFicthA"
+    },
+    {
+      "img": "photo-1784651989032-b55410f21e52",
+      "author": "McFollis",
+      "page": "ARbIPXSI4dA"
+    },
+    {
+      "img": "photo-1541823709867-1b206113eafd",
+      "author": "Anthony Tran",
+      "page": "3Xkms-gMvZg"
+    },
+    {
+      "img": "photo-1596075700978-ecba72d16eb0",
+      "author": "Mark Farías",
+      "page": "on4m9g6bJe4"
+    },
+    {
+      "img": "photo-1535713875002-d1d0cf377fde",
+      "author": "Alex Suprun",
+      "page": "ZHvM3XIOHoE"
+    }
+  ],
+  "spec": {
+    "use_when": [
+      "a time-boxed contest or class challenge where people want to see their own place even when far from the top"
+    ],
+    "avoid_when": [
+      "a ranked table of work data such as sales by account: use receipts-table or bar-chart",
+      "a single person's own streak or progress: use lesson-streak or daily-goals",
+      "people to follow rather than to compare: use follow-suggestions"
+    ],
+    "parts": [
+      {
+        "name": "eyebrow",
+        "selector": ".odl-eyebrow",
+        "what": "the contest name and time left",
+        "slot": "text"
+      },
+      {
+        "name": "title",
+        "selector": "h3",
+        "what": "the board's heading",
+        "slot": "text"
+      },
+      {
+        "name": "period",
+        "selector": ".odl-seg label",
+        "what": "one period in the This week or All time switch",
+        "slot": "list"
+      },
+      {
+        "name": "podium",
+        "selector": ".odl-podium > li",
+        "what": "one of the top three: photo, rank badge, name and points; first is larger with a crown",
+        "slot": "list"
+      },
+      {
+        "name": "rows",
+        "selector": ".odl-row",
+        "what": "one ranked row: rank, photo, name, how far it moved, points",
+        "slot": "list"
+      },
+      {
+        "name": "gap",
+        "selector": ".odl-gap",
+        "what": "three dots for the ranks left out",
+        "slot": "none"
+      },
+      {
+        "name": "you",
+        "selector": ".odl-row.is-you",
+        "what": "your own row, highlighted, with a You tag",
+        "slot": "rich"
+      }
+    ],
+    "data": {
+      "type": "object",
+      "required": [
+        "title",
+        "periods"
+      ],
+      "properties": {
+        "eyebrow": {
+          "type": "string",
+          "maxLength": 40,
+          "part": "eyebrow"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 24,
+          "part": "title"
+        },
+        "periods": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "part": "period",
+          "items": {
+            "type": "object",
+            "required": [
+              "label",
+              "podium",
+              "rows"
+            ],
+            "properties": {
+              "label": {
+                "type": "string",
+                "maxLength": 12
+              },
+              "podium": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 3,
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "name",
+                    "points"
+                  ],
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "maxLength": 24
+                    },
+                    "photo": {
+                      "type": "string",
+                      "maxLength": 300
+                    },
+                    "points": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "rows": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 10,
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "rank",
+                    "name",
+                    "points"
+                  ],
+                  "properties": {
+                    "rank": {
+                      "type": "integer",
+                      "minimum": 4,
+                      "maximum": 999
+                    },
+                    "name": {
+                      "type": "string",
+                      "maxLength": 28
+                    },
+                    "photo": {
+                      "type": "string",
+                      "maxLength": 300
+                    },
+                    "change": {
+                      "type": "integer"
+                    },
+                    "points": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "you": {
+                "type": "object",
+                "part": "you",
+                "required": [
+                  "rank",
+                  "name",
+                  "points"
+                ],
+                "properties": {
+                  "rank": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 999
+                  },
+                  "name": {
+                    "type": "string",
+                    "maxLength": 24
+                  },
+                  "photo": {
+                    "type": "string",
+                    "maxLength": 300
+                  },
+                  "change": {
+                    "type": "integer"
+                  },
+                  "points": {
+                    "type": "number"
+                  }
+                }
+              },
+              "you_rank": {
+                "type": "string",
+                "maxLength": 80
+              },
+              "you_photo": {
+                "type": "object",
+                "required": [
+                  "src",
+                  "alt"
+                ],
+                "properties": {
+                  "src": {
+                    "type": "string",
+                    "maxLength": 2048
+                  },
+                  "alt": {
+                    "type": "string",
+                    "maxLength": 200
+                  }
+                }
+              },
+              "you_name": {
+                "type": "string",
+                "maxLength": 80
+              },
+              "you_change": {
+                "type": "string",
+                "maxLength": 80
+              },
+              "you_points": {
+                "type": "string",
+                "maxLength": 80
+              }
+            }
+          }
+        }
+      }
+    },
+    "edge": {
+      "empty": {
+        "status": "handled",
+        "evidence": "data-od-list",
+        "how": "the Smart UI renderer puts one plain 'Nothing to show yet.' line in an empty list"
+      },
+      "loading": {
+        "status": "handled",
+        "evidence": "data-od-slot",
+        "how": "the Smart UI renderer draws each marked slot as a quiet block of its size while the data arrives; the static file shows the filled part"
+      },
+      "error": {
+        "status": "not_built",
+        "how": "if scores fail to load, replace the panel with an alert-banners line and keep the period switch"
+      },
+      "disabled": {
+        "status": "not_built",
+        "how": "for a period with no data yet, set disabled on its radio and grey its label"
+      },
+      "overflow": {
+        "status": "not_built",
+        "how": "the list does not scroll; show only the top rows, a gap and your row, and send the rest to a full page or pagination"
+      },
+      "long_text": {
+        "status": "handled",
+        "how": "row names are cut with an ellipsis; podium names wrap and break long words",
+        "evidence": "text-overflow: ellipsis; white-space: nowrap"
+      },
+      "missing_image": {
+        "status": "handled",
+        "evidence": "data-od-media",
+        "how": "the Smart UI renderer swaps a photo that fails to load for a block of the same size with its alt text"
+      }
+    },
+    "keyboard": [
+      "Tab reaches the period switch",
+      "Arrow keys move between This week and All time, as in any native radio group, and the board below changes with it"
+    ]
+  }
+}

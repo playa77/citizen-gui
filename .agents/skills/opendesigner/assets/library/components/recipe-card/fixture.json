@@ -1,0 +1,49 @@
+{
+ "photo": {
+  "src": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=960&h=640&fit=crop&auto=format&q=70",
+  "alt": "Bowl of mixed vegetable salad",
+  "width": 960,
+  "height": 640,
+  "credit": "Photo: Anna Pelzer on Unsplash"
+ },
+ "kicker": "Lunch · Vegan",
+ "title": "Roast squash bowl with chickpeas and avocado",
+ "time": "35 min",
+ "servings": "Serves 2",
+ "level": "Easy",
+ "intro": "Roast squash and crisp chickpeas over greens, with avocado, tomatoes and a lemon dressing.",
+ "ingredients": [
+  {
+   "text": "Half a butternut squash"
+  },
+  {
+   "text": "1 tin of chickpeas"
+  },
+  {
+   "text": "1 ripe avocado"
+  },
+  {
+   "text": "A handful of cherry tomatoes"
+  },
+  {
+   "text": "2 handfuls of salad leaves"
+  },
+  {
+   "text": "1 lemon and 2 tbsp olive oil"
+  }
+ ],
+ "steps": [
+  {
+   "text": "Heat the oven to 200 °C. Cube the squash, toss it in oil and salt, and roast for 25 minutes."
+  },
+  {
+   "text": "Drain the chickpeas, pat them dry and roast them beside the squash for the last 15 minutes."
+  },
+  {
+   "text": "Whisk the lemon juice with the olive oil and a pinch of salt."
+  },
+  {
+   "text": "Build the bowls on the leaves with sliced avocado and halved tomatoes, then pour over the dressing."
+  }
+ ]
+}

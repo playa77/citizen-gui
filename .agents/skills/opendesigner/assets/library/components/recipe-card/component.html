@@ -1,0 +1,86 @@
+<!-- Icons: Lucide (lucide.dev), ISC licence -->
+<style>
+.odl-recipe-card { box-sizing: border-box; inline-size: 100%; max-inline-size: 52rem; margin-inline: auto; container-type: inline-size; color: var(--ds-color-text-primary); font: var(--ds-text-body-md); text-wrap: pretty; }
+.odl-recipe-card *, .odl-recipe-card *::before, .odl-recipe-card *::after { box-sizing: border-box; }
+.odl-recipe-card .odl-card { display: grid; overflow: hidden; background: var(--ds-color-surface-raised); border: var(--ds-border-width-default) solid var(--ds-color-border-subtle);
+  border-radius: var(--ds-radius-container); box-shadow: var(--ds-elevation-raised); }
+.odl-recipe-card .odl-ph::after { content: none; }
+.odl-recipe-card .odl-body { display: grid; align-content: start; gap: var(--ds-space-stack-sm); padding: var(--ds-space-inset-lg); min-inline-size: 0; }
+.odl-recipe-card .odl-head { display: grid; gap: var(--ds-space-stack-xs); }
+.odl-recipe-card h3 { margin: 0; font: var(--ds-text-title-md); overflow-wrap: anywhere; }
+.odl-recipe-card .odl-kicker { margin: 0; color: var(--ds-color-text-secondary); font: var(--ds-text-label-md); }
+.odl-recipe-card .odl-facts { display: flex; flex-wrap: wrap; gap: var(--ds-space-stack-xs) var(--ds-space-inline-md); margin: 0; padding: 0; list-style: none; color: var(--ds-color-text-secondary); font: var(--ds-text-body-sm); font-variant-numeric: tabular-nums; }
+.odl-recipe-card .odl-facts li { display: inline-flex; align-items: center; gap: var(--ds-space-inline-sm); white-space: nowrap; }
+.odl-recipe-card .odl-facts svg { flex: none; inline-size: var(--ds-size-icon-sm); block-size: var(--ds-size-icon-sm); stroke-width: var(--ds-icon-stroke-md); }
+.odl-recipe-card .odl-acts { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ds-space-stack-sm) var(--ds-space-inline-md); margin-block-start: var(--ds-space-stack-sm); }
+.odl-recipe-card .odl-price { display: grid; margin: 0; font-variant-numeric: tabular-nums; }
+.odl-recipe-card .odl-price strong { font: var(--ds-text-title-md); font-weight: var(--ds-font-weight-heading); }
+.odl-recipe-card .odl-price span { color: var(--ds-color-text-secondary); font: var(--ds-text-label-md); }
+.odl-recipe-card .odl-btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--ds-space-inline-sm); min-block-size: max(var(--ds-size-control-md), var(--ds-size-target-min));
+  padding: 0 var(--ds-space-inset-lg); border: var(--ds-border-width-default) solid transparent; border-radius: var(--ds-radius-control); background: var(--ds-color-bg-action-primary);
+  color: var(--ds-color-text-on-action); font: var(--ds-text-label-lg); font-weight: var(--ds-font-weight-label); cursor: pointer;
+  transition: background-color var(--ds-motion-duration-short) var(--ds-motion-easing-standard); }
+.odl-recipe-card .odl-btn:hover { background: var(--ds-color-bg-action-primary-hover); }
+.odl-recipe-card .odl-btn.is-quiet { border-color: var(--ds-color-border-default); background: var(--ds-color-surface-raised); color: var(--ds-color-text-primary); }
+.odl-recipe-card .odl-btn.is-quiet:hover { background: var(--ds-color-bg-neutral-subtle); }
+.odl-recipe-card .odl-btn:focus-visible { outline: var(--ds-focus-ring-width) solid var(--ds-color-border-focus); outline-offset: var(--ds-focus-ring-offset); }
+.odl-recipe-card .odl-btn:disabled { cursor: not-allowed; border-color: var(--ds-color-border-subtle); background: var(--ds-color-bg-neutral-subtle); color: var(--ds-color-text-secondary); }
+.odl-recipe-card .odl-btn svg { inline-size: var(--ds-size-icon-sm); block-size: var(--ds-size-icon-sm); stroke-width: var(--ds-icon-stroke-md); }
+.odl-recipe-card .odl-body > .odl-status { min-block-size: 0; padding-inline: 0; background: transparent; }
+.odl-recipe-card .odl-card > .odl-ph { aspect-ratio: 3 / 2; }
+.odl-recipe-card .odl-intro { margin: 0; color: var(--ds-color-text-secondary); font: var(--ds-text-body-md); }
+.odl-recipe-card .odl-cols { display: grid; gap: var(--ds-space-stack-lg); margin-inline: var(--ds-space-inset-lg); padding-block: var(--ds-space-stack-md) var(--ds-space-inset-lg); border-block-start: var(--ds-border-width-default) solid var(--ds-color-border-subtle); }
+.odl-recipe-card h4 { margin: 0 0 var(--ds-space-stack-sm); color: var(--ds-color-text-secondary); font: var(--ds-text-label-md); font-weight: var(--ds-font-weight-label); }
+.odl-recipe-card .odl-ingredients { display: grid; gap: var(--ds-space-stack-xs); margin: 0; padding: 0; list-style: none; font: var(--ds-text-body-md); }
+.odl-recipe-card .odl-ingredients li { display: flex; gap: var(--ds-space-inline-sm); }
+.odl-recipe-card .odl-ingredients li::before { content: ""; flex: none; inline-size: var(--ds-space-4); block-size: var(--ds-space-4); margin-block-start: calc((1lh - var(--ds-space-4)) / 2); border-radius: var(--ds-radius-full); background: var(--ds-color-text-tertiary); }
+.odl-recipe-card .odl-steps { display: grid; gap: var(--ds-space-stack-md); margin: 0; padding: 0; list-style: none; counter-reset: odl-step; }
+.odl-recipe-card .odl-steps li { display: grid; grid-template-columns: var(--ds-size-control-sm) minmax(0, 1fr); gap: var(--ds-space-inline-md); counter-increment: odl-step; font: var(--ds-text-body-md); }
+.odl-recipe-card .odl-steps li::before { content: counter(odl-step); display: grid; place-items: center; inline-size: var(--ds-size-control-sm); block-size: var(--ds-size-control-sm);
+  border-radius: var(--ds-radius-full); background: var(--ds-color-bg-neutral-subtle); color: var(--ds-color-text-primary); font: var(--ds-text-label-md); font-weight: var(--ds-font-weight-label); font-variant-numeric: tabular-nums; }
+.odl-recipe-card .odl-steps p { margin: 0; overflow-wrap: anywhere; }
+@container (min-width: 36rem) {
+  .odl-recipe-card .odl-top { display: grid; grid-template-columns: minmax(0, 40%) minmax(0, 1fr); gap: var(--ds-space-24); align-items: start; }
+  .odl-recipe-card .odl-top > .odl-ph { border-radius: var(--ds-radius-nested); }
+  .odl-recipe-card .odl-card { padding: var(--ds-space-inset-xl); gap: var(--ds-space-stack-lg); }
+  .odl-recipe-card .odl-body { padding: 0; }
+  .odl-recipe-card .odl-cols { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); margin-inline: 0; padding-block-end: 0; }
+}
+.odl-recipe-card .odl-ph { position: relative; inline-size: 100%; overflow: hidden; background: var(--ds-color-surface-sunken); }
+.odl-recipe-card .odl-ph::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 var(--ds-border-width-default) var(--ds-color-border-subtle); pointer-events: none; }
+.odl-recipe-card .odl-ph .odl-img { position: absolute; inset: 0; display: block; inline-size: 100%; block-size: 100%; aspect-ratio: auto; object-fit: cover; }
+.odl-recipe-card .odl-status { display: inline-flex; align-items: center; gap: var(--ds-space-inline-sm); inline-size: fit-content; max-inline-size: 100%; min-block-size: var(--ds-size-control-sm);
+  padding: 0 var(--ds-space-inset-sm); border-radius: var(--ds-radius-full); background: var(--ds-color-surface-raised); color: var(--ds-color-text-secondary);
+  font: var(--ds-text-label-md); font-weight: var(--ds-font-weight-label); }
+.odl-recipe-card .odl-status::before { content: ""; flex: none; inline-size: var(--ds-space-6); block-size: var(--ds-space-6); border-radius: var(--ds-radius-full); background: currentColor; }
+.odl-recipe-card .odl-status[data-tone="neutral"] { color: var(--ds-color-text-secondary); }
+.odl-recipe-card .odl-status[data-tone="success"] { color: var(--ds-color-text-success); }
+.odl-recipe-card .odl-status[data-tone="warning"] { color: var(--ds-color-text-warning); }
+.odl-recipe-card .odl-status[data-tone="danger"] { color: var(--ds-color-text-danger); }
+.odl-recipe-card [data-od-item][hidden] { display: none; }
+.odl-recipe-card .odl-sr { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.odl-recipe-card .odl-top > .odl-ph { aspect-ratio: 3 / 2; min-block-size: 10rem; }
+.odl-recipe-card .odl-top > .odl-ph { border-start-start-radius: calc(var(--ds-radius-container) - var(--ds-border-width-default)); border-start-end-radius: calc(var(--ds-radius-container) - var(--ds-border-width-default)); border-end-start-radius: 0; border-end-end-radius: 0; }
+@container (min-width: 36rem) { .odl-recipe-card .odl-top > .odl-ph { border-radius: var(--ds-radius-nested); } }
+@media (prefers-reduced-motion: reduce) { .odl-recipe-card, .odl-recipe-card *, .odl-recipe-card *::before { transition: none !important; animation: none !important; } }
+</style>
+<article class="odl-recipe-card" aria-label="Miso ramen with a soft egg" data-od-label="title">
+  <div class="odl-card">
+    <div class="odl-top">
+      <div class="odl-ph"><img class="odl-img" data-od-media="photo" src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=960&amp;h=640&amp;fit=crop&amp;auto=format&amp;q=70" alt="Bowl of ramen with a soft egg" width="480" height="320" loading="lazy" decoding="async"></div>
+      <div class="odl-body">
+        <div class="odl-head"><p class="odl-kicker" data-od-slot="kicker" data-od-optional>Weeknight · Vegetarian option</p><h3 data-od-slot="title">Miso ramen with a soft egg</h3></div>
+        <ul class="odl-facts">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span class="odl-sr">Time: </span><span data-od-slot="time">25 min</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span data-od-slot="servings">Serves 2</span></li>
+          <li data-od-optional><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21a1 1 0 0 0 1-1v-5.35c0-.457.316-.844.727-1.041a4 4 0 0 0-2.134-7.589 5 5 0 0 0-9.186 0 4 4 0 0 0-2.134 7.588c.411.198.727.585.727 1.041V20a1 1 0 0 0 1 1Z"/><path d="M6 17h12"/></svg><span data-od-slot="level">Easy</span></li>
+        </ul>
+        <p class="odl-intro" data-od-slot="intro" data-od-optional>A quick bowl from the cupboard: miso broth, springy noodles and a jammy egg.</p>
+      </div>
+    </div>
+    <div class="odl-cols">
+      <div data-od-optional><h4>Ingredients</h4><ul class="odl-ingredients" data-od-list="ingredients"><li data-od-item><span data-od-slot="text">2 nests of ramen noodles</span></li><li data-od-item><span data-od-slot="text">1 litre chicken or vegetable stock</span></li><li data-od-item><span data-od-slot="text">2 tbsp white miso</span></li><li data-od-item><span data-od-slot="text">2 eggs</span></li><li data-od-item><span data-od-slot="text">2 spring onions</span></li><li data-od-item><span data-od-slot="text">A handful of spinach</span></li></ul></div>
+      <div><h4>Steps</h4><ol class="odl-steps" data-od-list="steps"><li data-od-item><p data-od-slot="text">Boil the eggs for 6½ minutes, then cool them in cold water and peel.</p></li><li data-od-item><p data-od-slot="text">Warm the stock and whisk in the miso. Do not let it boil.</p></li><li data-od-item><p data-od-slot="text">Cook the noodles for 3 minutes and drain.</p></li><li data-od-item><p data-od-slot="text">Wilt the spinach in the broth, then pour over the noodles and top with halved eggs and spring onion.</p></li></ol></div>
+    </div>
+  </div>
+</article>

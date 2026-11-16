@@ -1,0 +1,233 @@
+{
+  "name": "Recipe card",
+  "summary": "A dish with its photo, the time it takes, how many it serves, the ingredients and numbered steps. The photo sits beside the title when there is room, and the ingredients beside the steps.",
+  "use": "when someone asks what to cook or how to make a dish",
+  "type": "content",
+  "style": "friendly",
+  "industries": [
+    "food",
+    "home",
+    "any"
+  ],
+  "tags": [
+    "recipe",
+    "food",
+    "photo",
+    "steps",
+    "card"
+  ],
+  "states": [
+    "with ingredients",
+    "steps only",
+    "photo beside when wide",
+    "stacked when narrow"
+  ],
+  "source": null,
+  "a11y": "An article named by the dish; the steps are an ordered list read with their numbers, and time and servings are words beside their icons.",
+  "width": "medium",
+  "photos": [
+    {
+      "img": "photo-1569718212165-3a8278d5f624",
+      "author": "Michele Blackwell",
+      "page": "rAyCBQTH7ws"
+    }
+  ],
+  "spec": {
+    "use_when": [
+      "one recipe the person asked for, or the one the assistant recommends"
+    ],
+    "avoid_when": [
+      "several dishes to choose from: use result-list",
+      "a dish on a restaurant menu: use menu-item"
+    ],
+    "parts": [
+      {
+        "name": "photo",
+        "selector": ".odl-ph .odl-img",
+        "what": "the dish",
+        "slot": "media"
+      },
+      {
+        "name": "kicker",
+        "selector": ".odl-kicker",
+        "what": "a short line above the title (meal, diet)",
+        "slot": "text"
+      },
+      {
+        "name": "title",
+        "selector": ".odl-recipe-card h3",
+        "what": "the dish",
+        "slot": "text"
+      },
+      {
+        "name": "facts",
+        "selector": ".odl-facts",
+        "what": "time, servings and how hard it is, each with an icon",
+        "slot": "text"
+      },
+      {
+        "name": "intro",
+        "selector": ".odl-intro",
+        "what": "one or two lines about the dish",
+        "slot": "text"
+      },
+      {
+        "name": "ingredients",
+        "selector": ".odl-ingredients",
+        "what": "what to buy, one per line",
+        "slot": "list"
+      },
+      {
+        "name": "steps",
+        "selector": ".odl-steps",
+        "what": "numbered steps",
+        "slot": "list"
+      }
+    ],
+    "data": {
+      "type": "object",
+      "required": [
+        "photo",
+        "title",
+        "time",
+        "servings",
+        "steps"
+      ],
+      "properties": {
+        "photo": {
+          "type": "object",
+          "part": "photo",
+          "required": [
+            "src",
+            "alt"
+          ],
+          "properties": {
+            "src": {
+              "type": "string",
+              "maxLength": 2048
+            },
+            "alt": {
+              "type": "string",
+              "maxLength": 200
+            },
+            "width": {
+              "type": "integer"
+            },
+            "height": {
+              "type": "integer"
+            },
+            "ratio": {
+              "type": "string",
+              "maxLength": 12
+            },
+            "credit": {
+              "type": "string",
+              "maxLength": 120
+            }
+          }
+        },
+        "kicker": {
+          "type": "string",
+          "maxLength": 40,
+          "part": "kicker"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 60,
+          "part": "title"
+        },
+        "time": {
+          "type": "string",
+          "maxLength": 16,
+          "part": "facts"
+        },
+        "servings": {
+          "type": "string",
+          "maxLength": 16,
+          "part": "facts"
+        },
+        "level": {
+          "type": "string",
+          "maxLength": 12,
+          "part": "facts"
+        },
+        "intro": {
+          "type": "string",
+          "maxLength": 160,
+          "part": "intro"
+        },
+        "ingredients": {
+          "type": "array",
+          "maxItems": 14,
+          "part": "ingredients",
+          "items": {
+            "type": "object",
+            "required": [
+              "text"
+            ],
+            "properties": {
+              "text": {
+                "type": "string",
+                "maxLength": 60
+              }
+            }
+          }
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "part": "steps",
+          "items": {
+            "type": "object",
+            "required": [
+              "text"
+            ],
+            "properties": {
+              "text": {
+                "type": "string",
+                "maxLength": 200
+              }
+            }
+          }
+        }
+      }
+    },
+    "edge": {
+      "empty": {
+        "status": "not_built",
+        "how": "without steps, answer in text; the card is for a recipe someone will cook"
+      },
+      "loading": {
+        "status": "handled",
+        "how": "the photo box keeps its 3:2 shape on the sunken surface and pulses quietly until the photo arrives",
+        "evidence": "aspect-ratio: 3 / 2"
+      },
+      "error": {
+        "status": "handled",
+        "how": "a photo that fails keeps its box, with an icon and the photo's description",
+        "evidence": "class=\"odl-img\""
+      },
+      "disabled": {
+        "status": "not_built",
+        "how": "nothing in the card can be turned off; it has no buttons"
+      },
+      "overflow": {
+        "status": "handled",
+        "how": "in a narrow container the photo, ingredients and steps stack",
+        "evidence": "@container (min-width: 36rem)"
+      },
+      "long_text": {
+        "status": "handled",
+        "how": "steps wrap, long words break",
+        "evidence": "overflow-wrap: anywhere"
+      },
+      "missing_image": {
+        "status": "handled",
+        "evidence": "data-od-media",
+        "how": "the Smart UI renderer swaps a photo that fails to load for a calm tile of the same shape with an icon and its alt text"
+      }
+    },
+    "keyboard": []
+  }
+}
