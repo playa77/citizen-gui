@@ -18,6 +18,7 @@ import { CalculationTable } from '@/components/dossier/CalculationTable';
 import { AdversarialReviewCard } from '@/components/dossier/AdversarialReviewCard';
 import { ClaimCard } from '@/components/dossier/ClaimCard';
 import { EvidenceCitationDrawer } from '@/components/dossier/EvidenceCitationDrawer';
+import { DocumentGeneratorForm } from '@/components/documents/DocumentGeneratorForm';
 import type { OcrAssessmentResponse } from '@/types/api';
 import type { Claim, EvidenceBinding, AdjudicationStatus } from '@/types/domain';
 
@@ -417,6 +418,16 @@ export const AnalyzeView: React.FC<AnalyzeViewProps> = ({
                   />
                 ))}
               </div>
+            </section>
+          )}
+
+          {/* 5. Procedural Document Generator */}
+          {activeId && (
+            <section className="pt-4" role="region" aria-label="Schriftsatz erstellen">
+              <DocumentGeneratorForm
+                caseRunId={activeId}
+                deadlineDate={finalPayload.final_output?.fristen?.frist_ende}
+              />
             </section>
           )}
 

@@ -16,6 +16,7 @@ import { CalculationTable } from '@/components/dossier/CalculationTable';
 import { AdversarialReviewCard } from '@/components/dossier/AdversarialReviewCard';
 import { ClaimCard } from '@/components/dossier/ClaimCard';
 import { EvidenceCitationDrawer } from '@/components/dossier/EvidenceCitationDrawer';
+import { DocumentGeneratorForm } from '@/components/documents/DocumentGeneratorForm';
 import { formatDateGerman } from '@/utils/formatters';
 
 export interface CaseDetailViewProps {
@@ -335,6 +336,14 @@ export const CaseDetailView: React.FC<CaseDetailViewProps> = ({
           )}
         </section>
       )}
+
+      {/* 6. Procedural Document Generator */}
+      <section className="pt-2" role="region" aria-label="Schriftsatz erstellen">
+        <DocumentGeneratorForm
+          caseRunId={caseId}
+          deadlineDate={caseData.final_output?.fristen?.frist_ende}
+        />
+      </section>
 
       {/* Citation Slide-Over Drawer */}
       <EvidenceCitationDrawer
