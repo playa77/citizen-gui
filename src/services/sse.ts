@@ -13,6 +13,15 @@ export interface SseCallbacks {
   onError: (error: AnalysisErrorEventPayload) => void;
 }
 
+export interface SseConnectOptions {
+  url: string;
+  method?: string;
+  body?: unknown;
+  headers?: Record<string, string>;
+  onEvent: (ev: { event?: string; data: string }) => void;
+  onError?: (err: Error) => void;
+}
+
 export class SseClient {
   constructor(private readonly prefs: LocalPreferencesStore) {}
 
@@ -128,6 +137,60 @@ export class SseClient {
       });
     } catch {
       // Abort or error caught
+    } finally {
+      cleanup();
+    }
+  }
+
+  public async connect(options: SseConnectOptions): Promise<void> {
+    const abortController = new AbortController();
+    let isTerminated = false;
+
+    const cleanup = () => {
+      isTerminated = true;
+    };
+
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+      Accept: 'text/event-stream',
+      ...(options.headers || {}),
+    };
+
+    const ackVersion = this.prefs.getDisclaimerAckVersion();
+    if (ackVersion) {
+      headers['X-Disclaimer-Ack'] = ackVersion;
+    }
+
+    try {
+      await fetchEventSource(options.url, {
+        method: options.method || 'POST',
+        headers,
+        body: options.body !== undefined ? JSON.stringify(options.body) : undefined,
+        signal: abortController.signal,
+        async onopen(response) {
+          if (!response.ok) {
+            let errorText = '';
+            try {
+              errorText = await response.text();
+            } catch {
+              // ignore
+            }
+            throw new Error(`SSE stream connection failed (${response.status}): ${errorText}`);
+          }
+        },
+        onmessage(ev) {
+          if (isTerminated) return;
+          options.onEvent({ event: ev.event, data: ev.data });
+        },
+        onerror(err) {
+          cleanup();
+          const errorObj = err instanceof Error ? err : new Error(String(err));
+          options.onError?.(errorObj);
+          throw err;
+        },
+      });
+    } catch {
+      // Aborted or finished
     } finally {
       cleanup();
     }

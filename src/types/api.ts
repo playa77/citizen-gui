@@ -236,3 +236,95 @@ export interface CorpusJobStatusResponse {
   chunks_embedded: number;
   chunks_upserted: number;
 }
+
+// ==========================================
+// 7. Conversations (Chat-First API)
+// ==========================================
+export interface ConversationSummary {
+  id: string;
+  title: string;
+  created_at: string;
+  updated_at: string;
+  message_count: number;
+  document_count: number;
+}
+
+export interface AttachedDocument {
+  id: string;
+  original_filename: string;
+  created_at: string;
+  mime_type?: string;
+  file_size_bytes?: number;
+}
+
+export interface ConversationMessage {
+  id?: string;
+  role: "user" | "assistant" | "system";
+  content: string;
+  created_at?: string;
+  disclosure?: Art50Disclosure;
+  provenance?: ProvenancePayload;
+  sections?: string[];
+  final_output?: Record<string, unknown>;
+}
+
+export interface ConversationDetail {
+  id: string;
+  title: string;
+  created_at: string;
+  updated_at: string;
+  messages: ConversationMessage[];
+  documents: AttachedDocument[];
+}
+
+export interface SendMessageRequest {
+  content: string;
+}
+
+export interface ConversationStreamDoneEvent {
+  type: "done";
+  full_response: string;
+  disclosure: Art50Disclosure;
+  provenance: ProvenancePayload;
+}
+
+// ==========================================
+// 8. Intake Interviews API
+// ==========================================
+export interface IntakeStartRequest {
+  session_id?: string;
+  initial_text: string;
+  max_turns?: number; // 2..12, default 8
+}
+
+export interface IntakeMessage {
+  role: "user" | "assistant" | "system";
+  content: string;
+  timestamp?: string;
+}
+
+export interface IntakeResult {
+  legal_areas: string[];
+  summary: string;
+  key_facts: Record<string, unknown>;
+  open_questions: string[];
+}
+
+export interface IntakeSession {
+  id: string;
+  session_id: string;
+  state: "active" | "done";
+  turn_count: number;
+  max_turns: number;
+  messages: IntakeMessage[];
+  question?: string;
+  intake_result?: IntakeResult;
+  resolved_modules?: ResolvedModule[];
+  primary_area?: string;
+  secondary_areas?: string[];
+}
+
+export interface IntakeSendMessageRequest {
+  message: string;
+}
+

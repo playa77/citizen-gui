@@ -5,6 +5,9 @@ import { DisclaimerService } from './services/disclaimer';
 import { IngestionService } from './services/ingestion';
 import { AnalysisService } from './services/analysis';
 import { CasesService } from './services/cases';
+import { DocumentService } from './services/documents';
+import { ConversationService } from './services/conversations';
+import { IntakeService } from './services/intake';
 import { complianceStore } from './stores/complianceStore';
 
 export class CompositionRoot {
@@ -21,6 +24,13 @@ export class CompositionRoot {
   );
   public static readonly analysis = new AnalysisService(CompositionRoot.sse);
   public static readonly cases = new CasesService(CompositionRoot.http);
+  public static readonly documents = new DocumentService(CompositionRoot.http);
+  public static readonly conversations = new ConversationService(
+    CompositionRoot.http,
+    CompositionRoot.sse,
+    CompositionRoot.prefs
+  );
+  public static readonly intake = new IntakeService(CompositionRoot.http);
 }
 
 // Automatically wire HTTP 403 disclaimer mismatch to complianceStore

@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Scale, Moon, Sun, Monitor, FileSearch, FolderArchive } from 'lucide-react';
+import {
+  Scale,
+  Moon,
+  Sun,
+  Monitor,
+  FileSearch,
+  FolderArchive,
+  MessageSquare,
+  Sparkles,
+} from 'lucide-react';
 import { CompositionRoot } from '@/compositionRoot';
 import type { UiTheme } from '@/types/domain';
 
-export type ActiveTab = 'analyze' | 'archive' | 'detail';
+export type ActiveTab = 'analyze' | 'conversations' | 'intake' | 'archive' | 'detail';
 
 export interface NavbarProps {
   activeTab?: ActiveTab;
@@ -90,6 +99,34 @@ export const Navbar: React.FC<NavbarProps> = ({
 
               <button
                 type="button"
+                onClick={() => onNavigate('conversations')}
+                aria-current={activeTab === 'conversations' ? 'page' : undefined}
+                className={`inline-flex items-center gap-2 px-3.5 py-2 min-h-[var(--ds-size-target-min)] rounded-[var(--ds-radius-control)] ds-text-label-md font-semibold transition-colors ds-focus-ring cursor-pointer ${
+                  activeTab === 'conversations'
+                    ? 'bg-[var(--ds-color-surface-sunken)] text-[var(--ds-color-text-primary)] border border-[var(--ds-color-border-focus)]'
+                    : 'text-[var(--ds-color-text-secondary)] hover:text-[var(--ds-color-text-primary)] hover:bg-[var(--ds-color-bg-neutral-subtle)]'
+                }`}
+              >
+                <MessageSquare className="w-4 h-4" aria-hidden="true" />
+                <span>Konversation</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => onNavigate('intake')}
+                aria-current={activeTab === 'intake' ? 'page' : undefined}
+                className={`inline-flex items-center gap-2 px-3.5 py-2 min-h-[var(--ds-size-target-min)] rounded-[var(--ds-radius-control)] ds-text-label-md font-semibold transition-colors ds-focus-ring cursor-pointer ${
+                  activeTab === 'intake'
+                    ? 'bg-[var(--ds-color-surface-sunken)] text-[var(--ds-color-text-primary)] border border-[var(--ds-color-border-focus)]'
+                    : 'text-[var(--ds-color-text-secondary)] hover:text-[var(--ds-color-text-primary)] hover:bg-[var(--ds-color-bg-neutral-subtle)]'
+                }`}
+              >
+                <Sparkles className="w-4 h-4" aria-hidden="true" />
+                <span>Erstberatung</span>
+              </button>
+
+              <button
+                type="button"
                 onClick={() => onNavigate('archive')}
                 aria-current={activeTab === 'archive' || activeTab === 'detail' ? 'page' : undefined}
                 className={`inline-flex items-center gap-2 px-3.5 py-2 min-h-[var(--ds-size-target-min)] rounded-[var(--ds-radius-control)] ds-text-label-md font-semibold transition-colors ds-focus-ring cursor-pointer ${
@@ -121,6 +158,30 @@ export const Navbar: React.FC<NavbarProps> = ({
                 }`}
               >
                 <FileSearch className="w-5 h-5" aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                onClick={() => onNavigate('conversations')}
+                aria-label="Konversation"
+                className={`p-2 min-h-[var(--ds-size-target-min)] min-w-[var(--ds-size-target-min)] rounded-[var(--ds-radius-control)] ${
+                  activeTab === 'conversations'
+                    ? 'bg-[var(--ds-color-surface-sunken)] text-[var(--ds-color-text-primary)]'
+                    : 'text-[var(--ds-color-text-secondary)]'
+                }`}
+              >
+                <MessageSquare className="w-5 h-5" aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                onClick={() => onNavigate('intake')}
+                aria-label="Erstberatung"
+                className={`p-2 min-h-[var(--ds-size-target-min)] min-w-[var(--ds-size-target-min)] rounded-[var(--ds-radius-control)] ${
+                  activeTab === 'intake'
+                    ? 'bg-[var(--ds-color-surface-sunken)] text-[var(--ds-color-text-primary)]'
+                    : 'text-[var(--ds-color-text-secondary)]'
+                }`}
+              >
+                <Sparkles className="w-5 h-5" aria-hidden="true" />
               </button>
               <button
                 type="button"

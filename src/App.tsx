@@ -7,6 +7,8 @@ import { DisclaimerModal } from '@/components/layout/DisclaimerModal';
 import { AnalyzeView } from '@/views/AnalyzeView';
 import { CaseArchiveView } from '@/views/CaseArchiveView';
 import { CaseDetailView } from '@/views/CaseDetailView';
+import { ConversationView } from '@/views/ConversationView';
+import { IntakeView } from '@/views/IntakeView';
 
 export const App: React.FC = () => {
   const [isBootstrapping, setIsBootstrapping] = useState(true);
@@ -82,6 +84,18 @@ export const App: React.FC = () => {
           <>
             {activeTab === 'analyze' && (
               <AnalyzeView onViewCaseDetails={handleOpenCaseDetail} />
+            )}
+
+            {activeTab === 'conversations' && (
+              <ConversationView />
+            )}
+
+            {activeTab === 'intake' && (
+              <IntakeView
+                onStartAnalysis={() => {
+                  setActiveTab('analyze');
+                }}
+              />
             )}
 
             {activeTab === 'archive' && (

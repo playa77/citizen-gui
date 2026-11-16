@@ -97,7 +97,24 @@ export interface GeneratedDocument {
 export type OcrAssessment = OcrAssessmentResponse;
 
 // ==========================================
-// 4. Client Storage Preferences Types
+// 4. Conversations & Intake Domain Types
+// ==========================================
+export type {
+  ConversationSummary,
+  ConversationDetail,
+  ConversationMessage,
+  AttachedDocument,
+  SendMessageRequest,
+  ConversationStreamDoneEvent,
+  IntakeStartRequest,
+  IntakeMessage,
+  IntakeResult,
+  IntakeSession,
+  IntakeSendMessageRequest,
+} from './api';
+
+// ==========================================
+// 5. Client Storage Preferences Types
 // ==========================================
 export type UiTheme = "light" | "dark" | "system";
 export type DevDocumentTag = "synthetic" | "goldset";
