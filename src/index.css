@@ -1,0 +1,17 @@
+@import "tailwindcss";
+@import "../opendesigner/build/css/tokens.css";
+@import "../opendesigner/build/tailwind/theme.css";
+
+/* Base Accessibility Enforcements */
+:focus-visible {
+  outline: 2px solid var(--color-primary, var(--ds-color-border-focus));
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-iteration-count: 1 !important;
+  }
+}
